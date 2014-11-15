@@ -13,10 +13,24 @@ public class Customer {
     
     private String firstname;
     private String lastname;
+    private String username;
+    private String email;
+    private String street;
+    private int number;
+    private String password;
 
-    public Customer() {
-        
+    public Customer(String firstname, String lastname, String username, String email, String street, int number, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.street = street;
+        this.number = number;
+        this.password = password;
     }
+    
+
+    
 
     public String getFirstname() {
         return firstname;
@@ -32,6 +46,46 @@ public class Customer {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
