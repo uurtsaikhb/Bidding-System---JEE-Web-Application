@@ -9,7 +9,7 @@ package edu.mum.waa.models;
  *
  * @author uurtsaikh
  */
-public class Customer {
+public class User {
     
     private String firstname;
     private String lastname;
@@ -18,7 +18,7 @@ public class Customer {
     private int number;
     private String password;
 
-    public Customer(String firstname, 
+    public User(String firstname, 
             String lastname, 
             String username, 
             String email, 

@@ -9,8 +9,12 @@ package edu.mum.waa.models;
  *
  * @author uurtsaikh
  */
-public class Deal {
+public class Bid {
     
+    private int bidId;
+    private long bidAmount;
     
+    private Item item;
+    private User bidders;
     
 }

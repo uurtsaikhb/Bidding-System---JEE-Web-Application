@@ -5,25 +5,30 @@
  */
 package edu.mum.waa.models;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author uurtsaikh
  */
 public class Auction {
-    
-    private Customer customer;
 
-    /**
-     * @return the customer
-     */
-    public Customer getCustomer() {
-        return customer;
-    }
+    private long auctionId;
 
-    /**
-     * @param customer the customer to set
-     */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    private Date startDate;
+    private Date endDate;
+    private int bestBid;
+    private String status;
+
+    private double startPrice;
+    private double buyoutPrice;
+    private double stepPrice;
+
+    private Item item;
+    private User owner;
+    private Bid bid;
+
+    private List<User> bidders;
+
 }
