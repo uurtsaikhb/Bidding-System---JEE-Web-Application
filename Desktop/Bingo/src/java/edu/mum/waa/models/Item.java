@@ -5,9 +5,6 @@
  */
 package edu.mum.waa.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author uurtsaikh
@@ -18,6 +15,7 @@ public class Item {
     private int id;
     private String name;
     private String detail;
+    private String [] photos;
     
     private double startPrice;
     private double buyoutPrice;

@@ -11,4 +11,6 @@ package edu.mum.waa.models;
  */
 public class Deal {
     
+    
+    
 }

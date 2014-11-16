@@ -15,16 +15,20 @@ public class Customer {
     private String lastname;
     private String username;
     private String email;
-    private String street;
     private int number;
     private String password;
 
-    public Customer(String firstname, String lastname, String username, String email, String street, int number, String password) {
+    public Customer(String firstname, 
+            String lastname, 
+            String username, 
+            String email, 
+            String street, 
+            int number, 
+            String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.email = email;
-        this.street = street;
         this.number = number;
         this.password = password;
     }
@@ -62,14 +66,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public int getNumber() {
