@@ -16,6 +16,15 @@ public class Item {
     private String[] pictures;
     private Category category;
     private User user;
+
+    public Item(String name, String description, String[] pictures, Category category, User user) {
+        this.name = name;
+        this.description = description;
+        this.pictures = pictures;
+        this.category = category;
+        this.user = user;
+    }
+    
     
     public String getName() {
         return name;

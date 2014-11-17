@@ -43,4 +43,9 @@ public class Category {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+    
+    
+    public void addItem(Item item){
+        items.add(item);
+    }
 }
