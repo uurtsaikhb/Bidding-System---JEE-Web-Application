@@ -5,6 +5,9 @@
  */
 package edu.mum.waa.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author uurtsaikh
@@ -15,27 +18,16 @@ public class User {
     private String lastname;
     private String username;
     private String email;
-    private int number;
+    private String phone;
     private String password;
+    private List<Item> items;
+    private List<Auction> auctions;
 
-    public User(String firstname, 
-            String lastname, 
-            String username, 
-            String email, 
-            String street, 
-            int number, 
-            String password) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.email = email;
-        this.number = number;
-        this.password = password;
+    public User() {
+        this.items = new ArrayList<>();
+        this.auctions = new ArrayList<>();
     }
     
-
-    
-
     public String getFirstname() {
         return firstname;
     }
@@ -68,12 +60,12 @@ public class User {
         this.email = email;
     }
 
-    public int getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -83,7 +75,32 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
+    /**
+     * @return the items
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    /**
+     * @return the auctions
+     */
+    public List<Auction> getAuctions() {
+        return auctions;
+    }
+
+    /**
+     * @param auctions the auctions to set
+     */
+    public void setAuctions(List<Auction> auctions) {
+        this.auctions = auctions;
+    }
 }

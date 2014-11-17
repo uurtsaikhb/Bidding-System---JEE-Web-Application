@@ -11,28 +11,12 @@ package edu.mum.waa.models;
  */
 public class Item {
     
-    
-    private int id;
     private String name;
-    private String detail;
-    private String [] photos;
+    private String description;
+    private String[] pictures;
     private Category category;
-   
-
-    public Item(int id, String name, String detail) {
-        this.id = id;
-        this.name = name;
-        this.detail = detail;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    private User user;
+    
     public String getName() {
         return name;
     }
@@ -41,13 +25,41 @@ public class Item {
         this.name = name;
     }
 
-    public String getDetail() {
-        return detail;
+    public String[] getPictures() {
+        return pictures;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setPictures(String[] pictures) {
+        this.setPictures(pictures);
     }
 
-    
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -12,11 +12,9 @@ package edu.mum.waa.models;
 public class Category {
     
     private String name;
-    private Category parentCategory;
 
-    public Category(String name, Category parentCategory) {
+    public Category(String name) {
         this.name = name;
-        this.parentCategory = parentCategory;
     }
 
     public String getName() {
@@ -26,15 +24,4 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Category getparentCategory() {
-        return parentCategory;
-    }
-
-    public void setparentCategory(Category parentCategory) {
-        this.parentCategory = parentCategory;
-    }
-    
-    
-    
 }
