@@ -18,6 +18,13 @@
 
             <ui:define name="content">
                 #{msgs.loginWelcome}
+                 <h:form>
+                    <h:panelGrid columns="2">
+                        #{msgs.firstname}
+                        <h:inputText value="#{registerBean.firstname}" />
+                    </h:panelGrid>
+                     <h:commandButton value="#{msgs.signup}" action="#{registerBean.createUser}"/>
+                </h:form>
             </ui:define>
             <ui:define name="footing">
                 <ui:include src="/sections/login/footer.xhtml"/>
