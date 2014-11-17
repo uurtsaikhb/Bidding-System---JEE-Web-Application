@@ -5,6 +5,9 @@
  */
 package edu.mum.waa.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mandal
@@ -12,9 +15,11 @@ package edu.mum.waa.models;
 public class Category {
     
     private String name;
+    private List<Item> items;
 
     public Category(String name) {
         this.name = name;
+        this.items = new ArrayList<>();
     }
 
     public String getName() {
@@ -23,5 +28,19 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the items
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }
