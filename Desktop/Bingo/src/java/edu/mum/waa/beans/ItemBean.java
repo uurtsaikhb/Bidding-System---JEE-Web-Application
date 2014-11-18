@@ -54,6 +54,13 @@ public class ItemBean implements Serializable {
     
     private String destination = "/Users/javkhlant/Downloads/tmp/";
     
+    
+    /*
+        this List stores user's items
+    */
+    
+    private List<Item> userItems;
+    
     public ItemBean() {
     }
     
@@ -96,6 +103,18 @@ public class ItemBean implements Serializable {
         return "index";
     }
 
+    /* this method returns user's all items as  a List */
+    public List<Item> getUserItems () {
+//        userItems = new ArrayList<>();
+//        // get items from database using logged user.
+//        for (Item i : itemController.findAll()) {
+//            if (i.get)
+//        }
+//        userItems.add(null)
+        return itemController.findAll();
+    }
+    
+    
     public String getName() {
         return name;
     }
