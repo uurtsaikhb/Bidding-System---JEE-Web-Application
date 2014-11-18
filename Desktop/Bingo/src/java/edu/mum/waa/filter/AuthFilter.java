@@ -6,6 +6,7 @@
 package edu.mum.waa.filter;
 
 import edu.mum.waa.beans.LoginBean;
+import edu.mum.waa.models.User;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -43,18 +44,21 @@ public class AuthFilter implements Filter {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session = req.getSession(false);
-            System.out.println(req.getContextPath());
 
             String reqURI = req.getRequestURI();
-            if (session != null && session.getAttribute("user") != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            if (session != null && (User)session.getAttribute("user") != null) 
             {
-                res.sendRedirect("index.xhtml");
+                if(reqURI.indexOf("login.xhtml") >= 0)
+                {
+                    res.sendRedirect("index.xhtml");
+                }
             }
             else
             if (reqURI.indexOf("/addProduct.xhtml") >= 0) 
             {
                 res.sendRedirect("login.xhtml");
             }
+            
             chain.doFilter(request, response);
         } 
         catch (IOException | ServletException e) 
