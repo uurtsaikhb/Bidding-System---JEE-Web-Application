@@ -60,13 +60,6 @@ public class ItemBean implements Serializable {
     
     private List<Item> userItems;
     
-    
-    /*
-        this List stores user's items
-    */
-    
-    private List<Item> userItems;
-    
     public ItemBean() {
     }
     
