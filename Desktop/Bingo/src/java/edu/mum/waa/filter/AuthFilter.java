@@ -44,8 +44,8 @@ public class AuthFilter implements Filter {
             HttpSession session = req.getSession(false);
 
             String reqURI = req.getRequestURI();
-            if (loginBean != null && !loginBean.isLoggedIn() && reqURI.indexOf("/login.xhtml") >= 0) {
-                System.out.println(loginBean.getUserName());
+            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            {
                 res.sendRedirect("index.xhtml");
             }
             chain.doFilter(request, response);

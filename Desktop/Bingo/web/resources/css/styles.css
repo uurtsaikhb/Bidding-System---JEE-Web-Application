@@ -58,7 +58,6 @@ body
 .siteNav ul.sec li span {
     display: block;
     float: left;
-    margin-right: 8px;
 }
 
 
@@ -71,17 +70,68 @@ body
     line-height: 36px;
     padding: 0 15px;
 }
-
-.fa-user:before {
-    content:  url(images/user.png); 
+.siteNav ul.sec li span {
+    display: block;
+    float: left;
+    margin-right: 8px;
 }
 
-.siteNav ul.sec li i.fa {
+
+.top-bar {
+    background: none repeat scroll 0 0 #fefefe;
+    height: 80px;
+}
+
+.logo {
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    float: left;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.logo a
+{
+    text-decoration: none;
+    color: #E6222B;
+}
+
+.bottom-bar {
+    background: none repeat scroll 0 0 #e31132;
+    height: 56px;
+}
+.container-fluid {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.bottom-bar-inner {
+    padding: 12px 0;
+}
+
+
+
+.bottom-bar-inner:after {
+    clear: both;
+}
+
+.ad-ads {
+    float: left;
+}
+
+.ad-search {
+    float: left;
+    margin: 0 0 0 16px;
+}
+
+.siteNav ul li i.fa {
     color: #c4c4c4;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 36px;
 }
-
 .fa {
     -moz-osx-font-smoothing: grayscale;
     display: inline-block;
@@ -91,3 +141,55 @@ body
     line-height: 1;
 }
 
+.user-links {
+    float: right;
+    margin-right: 11px;
+    margin-top: -12px;
+}
+
+.btn-submit-ad {
+    background: none repeat scroll 0 0 #830015;
+    border-radius: 2px;
+    color: #fff;
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 36px;
+    text-decoration: none;
+}
+
+.ad-search-input {
+    background: none repeat scroll 0 0 #fff;
+    float: left;
+    height: 32px;
+    position: relative;
+}
+
+.ad-search-txt {
+    border: 0 none;
+    height: 32px;
+    max-width: 100%;
+    padding: 4px 10px;
+    width: 500px;
+}
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.btn-search-submit {
+    background-color: #840e0f;
+    border-radius: 0 2px 2px 0;
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 0;
+    padding: 0 20px;
+}
+.btn {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700 !important;
+}
