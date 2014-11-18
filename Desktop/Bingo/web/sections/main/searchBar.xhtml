@@ -6,7 +6,10 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,9 +26,14 @@ and open the template in the editor.
                             </a> 
                         </div> 
                         <div class="ad-search"> 
-                            <form action="/search" method="GET"> 
+                            <h:form> 
                                 <div class="ad-search-input"> 
-                                    <input type="text" value="" placeholder="Search..." class="ad-search-txt input-1" autocomplete="off" name="keyword" id="keyword"/> 
+                                    <h:inputText value="#{searchItemBean.searchText}" p:placeholder="Search... " class="ad-search-txt input-1" id="keyword"/>
+                                    <!-- <input type="text" value="" placeholder="Search..." 
+                                           class="ad-search-txt input-1" 
+                                           autocomplete="off" 
+                                           name="keyword" 
+                                           id="keyword"/> -->
                                         <div class="search-suggestion">
                                             <div class="suggestions">
                                                 <ul id="suggestion-list">
@@ -33,11 +41,12 @@ and open the template in the editor.
                                             </div>
                                         </div>
                                 </div>
-                                <button type="submit" class="btn btn-red btn-search-submit">
+                                <h:commandButton action="#{searchItemBean.searchItem}" value="Search" class="btn btn-red btn-search-submit"/>
+                                <!--<button type="submit" class="btn btn-red btn-search-submit">
                                     <span>Search</span> 
                                     <i class="fa fa-search"></i> 
-                                </button> 
-                            </form>
+                                </button> -->
+                            </h:form>
                         </div> 
                          
                     </div> 

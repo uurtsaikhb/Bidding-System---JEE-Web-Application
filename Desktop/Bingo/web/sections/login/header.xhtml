@@ -6,14 +6,58 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <ui:composition>
-            Login Header
+            <div class="barPrim">
+                <div class="container"> 
+                    <nav class="siteNav"> 
+                        <ul class="sec"> 
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="login">
+                                        <span>Login</span>
+                                        <i class="fa fa-user"></i>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="/register">
+                                        <span>Register</span>
+                                        <i class="fa fa-plus"></i>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                            <li>
+                                <a href="/login" class="active">
+                                    <span>#{loginBean.userName}</span>
+                                </a>
+                            </li> 
+                        </ul>  
+                    </nav> 
+                </div> 
+            </div>
+
+            <div class="top-bar"> 
+                <div class="container"> 
+                    <div class="clearfix"> 
+                        <div class="logo"> 
+                            
+                                <h:form>
+                                    <h:commandLink action="index" class="loading-bar2">
+                                #{msgs.title}.com
+                                    </h:commandLink>
+                                </h:form>
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
         </ui:composition>
     </body>
 </html>

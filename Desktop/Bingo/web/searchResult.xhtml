@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Search result</title>
     </h:head>
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">
@@ -16,12 +16,7 @@
             <ui:define name="content">
                 <div class="container">
                     <h:form>
-                        <h:panelGrid columns="1">
-                            <h:inputText value="#{loginBean.userName}" p:placeholder="Username"/>
-
-                            <h:inputSecret value="#{loginBean.userPassword}" p:placeholder="Password"/>
-                        </h:panelGrid>
-                        <h:commandButton value="Login" action="#{loginBean.signIn()}" />
+                        #{searchItemBean.searchText}
                     </h:form>
                 </div>
             </ui:define>

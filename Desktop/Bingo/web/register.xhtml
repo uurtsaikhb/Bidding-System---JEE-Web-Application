@@ -8,7 +8,7 @@
         <title>Register</title>
     </h:head>
     <h:body>
-        <ui:composition template="/templates/loginLayout.xhtml">
+        <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="windowTitle">
                 #{msgs.loginTitle}
             </ui:define>
@@ -18,23 +18,19 @@
             </ui:define>
 
             <ui:define name="content">
-                #{msgs.loginWelcome}
-                 <h:form>
-                    <h:panelGrid columns="1">
-                        <h:inputText value="#{userBean.firstname}" p:placeholder="#{msgs.firstname}"/>
-                        <h:inputText value="#{userBean.lastname}" p:placeholder="#{msgs.lastname}"/>
-                        <h:inputText value="#{userBean.username}" size="25" p:placeholder="#{msgs.userName}"/>
-                        <h:inputText value="#{userBean.email}" size="25" p:placeholder="#{msgs.email}" />
-                        <h:inputText value="#{userBean.phone}" p:placeholder="#{msgs.phone}"/>
-                        <h:inputSecret value="#{userBean.password}" p:placeholder="#{msgs.password}"/>
-                    </h:panelGrid>
-                     <h:commandButton value="#{msgs.signup}" action="#{userBean.createUser}"/>
-                </h:form>
-                <h:dataTable value="#{userBean.user}" var="user">
-                    <h:column>
-                        #{user.firstname}
-                    </h:column>
-                </h:dataTable>
+                <div class="container">
+                    <h:form>
+                        <h:panelGrid columns="1">
+                            <h:inputText value="#{userBean.firstname}" p:placeholder="#{msgs.firstname}"/>
+                            <h:inputText value="#{userBean.lastname}" p:placeholder="#{msgs.lastname}"/>
+                            <h:inputText value="#{userBean.username}" size="25" p:placeholder="#{msgs.userName}"/>
+                            <h:inputText value="#{userBean.email}" size="25" p:placeholder="#{msgs.email}" />
+                            <h:inputText value="#{userBean.phone}" p:placeholder="#{msgs.phone}"/>
+                            <h:inputSecret value="#{userBean.password}" p:placeholder="#{msgs.password}"/>
+                        </h:panelGrid>
+                        <h:commandButton value="#{msgs.signup}" action="#{userBean.createUser}"/>
+                    </h:form>
+                </div>
             </ui:define>
             <ui:define name="footing">
                 <ui:include src="/sections/login/footer.xhtml"/>
