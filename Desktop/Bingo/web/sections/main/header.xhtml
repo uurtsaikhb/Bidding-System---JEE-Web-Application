@@ -19,17 +19,21 @@ and open the template in the editor.
                     <nav class="siteNav"> 
                         <ul class="sec"> 
                             <li>
-                                <a href="/login" class="active">
-                                    <span>Login</span>
-                                    <i class="fa fa-user"></i>
-                                </a></li>
-                            <li>
-                                <a href="#{loginBean.signOut()}" class="active">
-                                    <span>Register</span>
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                                <h:form>
+                                    <h:commandLink action="login">
+                                        <span>Login</span>
+                                        <i class="fa fa-user"></i>
+                                    </h:commandLink>
+                                </h:form>
                             </li>
-                            
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="register">
+                                        <span>Register</span>
+                                        <i class="fa fa-plus"></i>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
                             <li>
                                 <a href="/login" class="active">
                                     <span>#{loginBean.userName}</span>
@@ -39,14 +43,17 @@ and open the template in the editor.
                     </nav> 
                 </div> 
             </div>
-            
+
             <div class="top-bar"> 
                 <div class="container"> 
                     <div class="clearfix"> 
                         <div class="logo"> 
-                            <a href="/" class="loading-bar2"> 
+                            
+                                <h:form>
+                                    <h:commandLink action="index" class="loading-bar2">
                                 #{msgs.title}.com
-                            </a> 
+                                    </h:commandLink>
+                                </h:form>
                         </div> 
                     </div> 
                 </div> 

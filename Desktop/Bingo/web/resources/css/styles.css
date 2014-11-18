@@ -164,22 +164,22 @@ body
     background: none repeat scroll 0 0 #fff;
     float: left;
     height: 32px;
-    position: relative;
+    overflow: hidden;
 }
 
 .ad-search-txt {
     border: 0 none;
     height: 32px;
     max-width: 100%;
-    padding: 4px 10px;
+    margin: 0px;
+    padding-left: 4px;
     width: 500px;
 }
-input, button, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-}
 
+.btn {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700 !important;
+}
 .btn-search-submit {
     background-color: #840e0f;
     border-radius: 0 2px 2px 0;
@@ -188,8 +188,25 @@ input, button, select, textarea {
     line-height: 32px;
     margin-left: 0;
     padding: 0 20px;
+    -moz-user-select: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
 }
-.btn {
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 700 !important;
+
+.btn-submit-ad span {
+    display: inline-block;
+    margin: 0 15px 0 0;
+}
+
+.btn-search-submit span {
+    display: inline-block;
+    margin: 0 8px 0 0;
 }
