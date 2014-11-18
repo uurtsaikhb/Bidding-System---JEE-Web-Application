@@ -283,6 +283,7 @@ body
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .form-flds-group{
@@ -309,4 +310,45 @@ body
 .row {
     margin-left: -15px;
     margin-right: -15px;
+}
+
+.column {
+    box-sizing: border-box;
+    text-align: center;
+}
+    
+
+
+.column .column_wrap {
+    padding: 40px 50px;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.footer-bottom-bar {
+    background: none repeat scroll 0 0 #282a2b;
+    border-top: 1px solid #4b4c4d;
+    color: #8c8989;
+    font-size: 12px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    height: 40px;
+}
+
+.center{
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+}
+
+.pull-left {
+    float: left;
+}
+
+#content
+{
+    margin-bottom: 10px;
 }
