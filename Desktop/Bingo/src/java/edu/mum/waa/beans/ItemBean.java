@@ -46,6 +46,8 @@ public class ItemBean implements Serializable {
     
     private List<Item> userItems;
     
+    private Item chosenItem; // chosen item  for make auction
+    
     public ItemBean() {
     }
     
@@ -66,6 +68,17 @@ public class ItemBean implements Serializable {
 //        }
 //        userItems.add(null)
         return itemController.findAll();
+    }
+    
+    /*
+        this method creates auction on item. 
+    */
+    
+    public String createAuction (int itemId){
+        
+        chosenItem = itemController.find(itemId);
+
+        return "createAuction";
     }
     
     
@@ -92,5 +105,13 @@ public class ItemBean implements Serializable {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }    
+
+    public Item getChosenItem() {
+        return chosenItem;
+    }
+
+    public void setChosenItem(Item chosenItem) {
+        this.chosenItem = chosenItem;
+    }
     
 }

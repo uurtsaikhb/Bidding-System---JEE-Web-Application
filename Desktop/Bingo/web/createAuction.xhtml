@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Create auction</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="windowTitle">
+                #{msgs.loginTitle}
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container">
+                    <h:form>
+                        <h:graphicImage library="images" name="iphone6.jpg" />
+                        <h:panelGrid columns="2">
+
+                            Starting price:
+                            <h:inputText value="" size="32"/>
+                            
+                            Step price:
+                            <h:inputText value="" size="32" />
+                            
+                            Buy out Price:
+                            <h:inputText value="" size="32" />
+                            
+                            <h:outputText value="#{itemBean.chosenItem.name}"/>
+                            <h:outputText value="#{itemBean.chosenItem.description}"/>
+
+                            <p:outputLabel for="datetimeStart" value="Datetime:" />
+                            <p:calendar id="datetimeStart" value="#{calendarView.date10}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                            <p:outputLabel for="datetimeEnd" value="Datetime:" />
+                            <p:calendar id="datetimeEnd" value="#{calendarView.date10}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
