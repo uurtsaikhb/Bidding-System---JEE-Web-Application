@@ -15,14 +15,25 @@
 
             <ui:define name="content">
                 <div class="container">
-                    <h:form>
-                        <h:panelGrid columns="1">
-                            <h:inputText value="#{loginBean.userName}" p:placeholder="Username"/>
-
-                            <h:inputSecret value="#{loginBean.userPassword}" p:placeholder="Password"/>
-                        </h:panelGrid>
-                        <h:commandButton value="Login" action="#{loginBean.signIn()}" />
-                    </h:form>
+                    <div class="column">
+                        <div class="center">
+                            <div class="column_wrap"> 
+                                <h2>Sign in</h2>
+                                <h:form>
+                                    <span class="error_list"></span>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{loginBean.userName}" p:placeholder="Username"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputSecret value="#{loginBean.userPassword}" p:placeholder="Password"/>
+                                    </div>
+                                    <div class="form-row">
+                                        <h:commandLink value="Login" action="#{loginBean.signIn()}" class="btn btn-add"/>
+                                    </div> 
+                                </h:form>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>
