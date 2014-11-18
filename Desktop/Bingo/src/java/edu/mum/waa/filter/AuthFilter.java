@@ -38,25 +38,22 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         
-        try {
+        try 
+        {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session = req.getSession(false);
 
             String reqURI = req.getRequestURI();
-            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            if (session != null && session.getAttribute("user") != null && reqURI.indexOf("/login.xhtml") >= 0) 
             {
                 res.sendRedirect("index.xhtml");
             }
-            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
-            {
-                res.sendRedirect("index.xhtml");
-            }
-            
-            
             chain.doFilter(request, response);
-        } catch (Throwable t) {
-            System.out.println(t.getMessage());
+        } 
+        catch (IOException | ServletException e) 
+        {
+            System.out.println(e.getMessage());
         }
     }
 
