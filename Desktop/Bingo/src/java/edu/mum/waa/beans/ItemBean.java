@@ -7,12 +7,10 @@ package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
-import edu.mum.waa.models.Category;
 import edu.mum.waa.models.Item;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.List;
 import javax.ejb.EJB;
 
 /**
