@@ -5,21 +5,41 @@
  */
 package edu.mum.waa.beans;
 
+import edu.mum.waa.controllers.UserFacadeLocal;
+import edu.mum.waa.filter.Util;
+import edu.mum.waa.models.User;
 import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author mandal
  */
 @Named
-@SessionScoped
-public class LoginBean implements Serializable
-{
+@RequestScoped
+public class LoginBean implements Serializable {
+
+    @EJB
+    UserFacadeLocal userController;
+
     private String userName;
     private String userPassword;
     private boolean isLoggedIn;
+    private User user;
+    
+    
+    public User getUser()
+    {
+        return Util.getUser();
+    }
+    
 
     public String getUserName() {
         return userName;
@@ -36,21 +56,43 @@ public class LoginBean implements Serializable
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
-    
-    public String signIn()
+
+    public String signIn() 
     {
-        isLoggedIn = true;
-        return "index.xhtml";
+        return checkLogin();
     }
-    
-    public String signOut()
-    {
+
+    public String signOut() {
         isLoggedIn = false;
+
+        HttpSession session = Util.getSession();
+        session.invalidate();
         return "login";
     }
 
-    public boolean isLoggedIn() 
-    {
+    public boolean isLoggedIn() {
         return isLoggedIn;
+    }
+
+    public String checkLogin() {
+        System.out.println("USER");
+        List<User> users = userController.findAll();
+        for (User _user : users) {
+            if (userName.equals(_user.getUsername()) && userPassword.equals(_user.getPassword())) 
+            {
+                System.out.println("Logged in");
+                HttpSession session = Util.getSession();
+                session.setAttribute("username", userName);
+                session.setAttribute("user", _user);
+                isLoggedIn = true;
+                return "index.xhtml";
+            }
+        }
+        // Set login ERROR
+        FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
+        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return "login.xhtml";
     }
 }

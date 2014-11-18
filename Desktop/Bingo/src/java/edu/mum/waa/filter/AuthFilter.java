@@ -6,6 +6,7 @@
 package edu.mum.waa.filter;
 
 import edu.mum.waa.beans.LoginBean;
+import edu.mum.waa.models.User;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -38,25 +39,31 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         
-        try {
+        try 
+        {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session = req.getSession(false);
 
             String reqURI = req.getRequestURI();
-            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            if (session != null && (User)session.getAttribute("user") != null) 
             {
-                res.sendRedirect("index.xhtml");
+                if(reqURI.indexOf("login.xhtml") >= 0)
+                {
+                    res.sendRedirect("index.xhtml");
+                }
             }
-            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            else
+            if (reqURI.indexOf("/addProduct.xhtml") >= 0) 
             {
-                res.sendRedirect("index.xhtml");
+                res.sendRedirect("login.xhtml");
             }
-            
             
             chain.doFilter(request, response);
-        } catch (Throwable t) {
-            System.out.println(t.getMessage());
+        } 
+        catch (IOException | ServletException e) 
+        {
+            System.out.println(e.getMessage());
         }
     }
 

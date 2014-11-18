@@ -20,7 +20,7 @@ and open the template in the editor.
                     <div class="container"> 
                         <div class="ad-ads">
                              <h:form>
-                                    <h:commandLink action="addProduct" class="loading-bar1 btn btn-red btn-submit-ad">
+                                    <h:commandLink action="addProduct?faces-redirect=true" class="loading-bar1 btn btn-red btn-submit-ad">
                                         <span>Add Product</span>
                                 <i class="fa fa-plus-circle"></i>
                                     </h:commandLink>
@@ -42,7 +42,7 @@ and open the template in the editor.
                                             </div>
                                         </div>
                                 </div>
-                                <h:commandButton action="#{searchItemBean.searchItem}" value="Search" class="btn btn-red btn-search-submit"/>
+                                <h:commandButton action="/searchResult" value="Search" class="btn btn-red btn-search-submit"/>
                                 <!--<button type="submit" class="btn btn-red btn-search-submit">
                                     <span>Search</span> 
                                     <i class="fa fa-search"></i> 
