@@ -7,7 +7,6 @@ package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
-import edu.mum.waa.controllers.PictureFacade;
 import edu.mum.waa.controllers.PictureFacadeLocal;
 import edu.mum.waa.models.Item;
 import edu.mum.waa.models.Picture;
@@ -100,7 +99,7 @@ public class ItemBean implements Serializable {
             Picture picture = new Picture(file.getPath(), item);
             pictureController.create(picture);
         }
-        return "index";
+        return "myItemList";
     }
 
     /* this method returns user's all items as  a List */
