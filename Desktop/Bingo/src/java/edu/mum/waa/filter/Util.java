@@ -5,6 +5,7 @@
  */
 package edu.mum.waa.filter;
 
+import edu.mum.waa.models.User;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,10 +34,10 @@ public class Util {
         return session.getAttribute("username").toString();
     }
 
-    public static String getUserId() {
+    public static User getUser() {
         HttpSession session = getSession();
         if (session != null) {
-            return (String) session.getAttribute("userid");
+            return (User) session.getAttribute("user");
         } else {
             return null;
         }

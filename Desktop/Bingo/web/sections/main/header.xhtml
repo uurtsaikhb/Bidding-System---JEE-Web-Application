@@ -7,7 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,25 +21,42 @@ and open the template in the editor.
                         <ul class="sec"> 
                             <li>
                                 <h:form>
-                                    <h:commandLink action="login">
-                                        <span>Login</span>
-                                        <i class="fa fa-user"></i>
-                                    </h:commandLink>
+                                    <c:if test="#{loginBean.user != null}">
+                                        <h:commandLink action="profile">
+                                            <span>
+                                                #{loginBean.user.username}
+                                            </span>
+                                            <i class="fa fa-user"></i>
+                                        </h:commandLink>
+                                    </c:if>
+                                    <c:if test="#{loginBean.user == null}">
+                                        <h:commandLink action="login?faces-redirect=true">
+                                            <span>
+                                                Sign In
+                                            </span>
+                                            <i class="fa fa-sign-in"></i>
+                                        </h:commandLink>
+                                    </c:if>
                                 </h:form>
                             </li>
                             <li>
                                 <h:form>
-                                    <h:commandLink action="/register">
+                                    <c:if test="#{loginBean.user != null}">
+                                        <h:commandLink action="#{loginBean.signOut}">
+                                            <span>
+                                                Sign Out
+                                            </span>
+                                            <i class="fa fa-sign-out"></i>
+                                        </h:commandLink>
+                                    </c:if>
+                                    <c:if test="#{loginBean.user == null}">
+                                    <h:commandLink action="register?faces-redirect=true">
                                         <span>Register</span>
                                         <i class="fa fa-plus"></i>
                                     </h:commandLink>
+                                    </c:if>
                                 </h:form>
                             </li>
-                            <li>
-                                <a href="/login" class="active">
-                                    <span>#{loginBean.userName}</span>
-                                </a>
-                            </li> 
                         </ul>  
                     </nav> 
                 </div> 
@@ -48,12 +66,12 @@ and open the template in the editor.
                 <div class="container"> 
                     <div class="clearfix"> 
                         <div class="logo"> 
-                            
-                                <h:form>
-                                    <h:commandLink action="index" class="loading-bar2">
-                                #{msgs.title}.com
-                                    </h:commandLink>
-                                </h:form>
+
+                            <h:form>
+                                <h:commandLink action="index?faces-redirect=true" class="loading-bar2">
+                                    #{msgs.title}.com
+                                </h:commandLink>
+                            </h:form>
                         </div> 
                     </div> 
                 </div> 
