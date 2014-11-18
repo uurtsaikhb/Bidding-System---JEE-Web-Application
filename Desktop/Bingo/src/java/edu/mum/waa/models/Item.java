@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE i.name = :name"),
     @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
 public class Item implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
+    private Collection<Picture> pictureCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -137,6 +139,15 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return "edu.mum.waa.models.Item[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Picture> getPictureCollection() {
+        return pictureCollection;
+    }
+
+    public void setPictureCollection(Collection<Picture> pictureCollection) {
+        this.pictureCollection = pictureCollection;
     }
     
 }
