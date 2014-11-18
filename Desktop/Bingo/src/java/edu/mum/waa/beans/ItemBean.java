@@ -51,7 +51,7 @@ public class ItemBean implements Serializable {
     private int categoryId;
     private List<File> files = new ArrayList<>();
     
-    private String destination = "/Users/javkhlant/Downloads/tmp/";
+    private String destination = "/Users/uurtsaikh/Downloads/tmp/";
     
     
     /*
