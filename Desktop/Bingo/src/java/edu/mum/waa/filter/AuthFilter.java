@@ -5,7 +5,7 @@
  */
 package edu.mum.waa.filter;
 
-import edu.mum.waa.controllers.LoginBean;
+import edu.mum.waa.beans.LoginBean;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.Filter;
