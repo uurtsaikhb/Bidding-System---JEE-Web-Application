@@ -5,9 +5,11 @@
  */
 package edu.mum.waa.beans;
 
+import edu.mum.waa.controllers.ItemFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 
 /**
  *
@@ -20,6 +22,8 @@ public class SearchItemBean implements Serializable {
     /**
      * Creates a new instance of SearchItemBean
      */
+    @EJB
+    ItemFacadeLocal itemController;
     
     private String searchText;
 
