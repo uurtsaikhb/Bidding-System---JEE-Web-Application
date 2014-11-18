@@ -16,7 +16,14 @@
             <ui:define name="content">
                 <div class="container">
                     <h:form>
-                        #{searchItemBean.searchText}
+                        <h:dataTable value="#{searchItemBean.resultItems}" var="item">
+                            <h:column>
+                                #{item.name}
+                            </h:column>
+                            <h:column>
+                                #{item.description}
+                            </h:column>
+                        </h:dataTable>
                     </h:form>
                 </div>
             </ui:define>

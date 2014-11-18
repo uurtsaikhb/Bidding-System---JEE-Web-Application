@@ -10,6 +10,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import edu.mum.waa.models.Item;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,13 +29,24 @@ public class SearchItemBean implements Serializable {
     ItemFacadeLocal itemController;
     
     private String searchText;
+    private List<Item> resultItems;
+    
 
     public SearchItemBean() {
     }
     
-    public String searchItem () {
-        System.out.println("Search Result: " + searchText);
-        return "/searchResult";
+    public List<Item> getResultItems () {
+        
+        resultItems = new ArrayList<Item>();
+        for (Item i : itemController.findAll()){
+            if (i.getName().toLowerCase().contains(searchText.toString()) || 
+                    i.getDescription().toLowerCase().contains(searchText.toLowerCase())){
+                resultItems.add(i);
+            }
+            
+        }
+        
+        return resultItems;
     }
 
     public String getSearchText() {
