@@ -30,7 +30,7 @@ and open the template in the editor.
                                         </h:commandLink>
                                     </c:if>
                                     <c:if test="#{loginBean.user == null}">
-                                        <h:commandLink action="login">
+                                        <h:commandLink action="login?faces-redirect=true">
                                             <span>
                                                 Sign In
                                             </span>
@@ -50,7 +50,7 @@ and open the template in the editor.
                                         </h:commandLink>
                                     </c:if>
                                     <c:if test="#{loginBean.user == null}">
-                                    <h:commandLink action="/register">
+                                    <h:commandLink action="register?faces-redirect=true">
                                         <span>Register</span>
                                         <i class="fa fa-plus"></i>
                                     </h:commandLink>
@@ -68,7 +68,7 @@ and open the template in the editor.
                         <div class="logo"> 
 
                             <h:form>
-                                <h:commandLink action="index" class="loading-bar2">
+                                <h:commandLink action="index?faces-redirect=true" class="loading-bar2">
                                     #{msgs.title}.com
                                 </h:commandLink>
                             </h:form>

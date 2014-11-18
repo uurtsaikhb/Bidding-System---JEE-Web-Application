@@ -43,11 +43,17 @@ public class AuthFilter implements Filter {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session = req.getSession(false);
+            System.out.println(req.getContextPath());
 
             String reqURI = req.getRequestURI();
             if (session != null && session.getAttribute("user") != null && reqURI.indexOf("/login.xhtml") >= 0) 
             {
                 res.sendRedirect("index.xhtml");
+            }
+            else
+            if (reqURI.indexOf("/addProduct.xhtml") >= 0) 
+            {
+                res.sendRedirect("login.xhtml");
             }
             chain.doFilter(request, response);
         } 
