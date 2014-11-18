@@ -12,11 +12,15 @@
                 #{msgs.title}
             </ui:define>
             <ui:define name="content">
-
-                #{msgs.loginWelcome}
-                <h:form>
-                    <h:commandLink value="Signup!" action="register"/>
-                </h:form>
+                <div class="container">
+                    #{msgs.loginWelcome}
+                    <h:form>
+                        <br>
+                            <h:commandLink value="My items" action="myItemList" />
+                        </br>
+                        <h:commandLink value="Signup!" action="register"/>
+                    </h:form>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

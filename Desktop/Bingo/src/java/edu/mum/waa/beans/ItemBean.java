@@ -12,6 +12,7 @@ import edu.mum.waa.models.Item;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 
@@ -38,17 +39,36 @@ public class ItemBean implements Serializable {
     private String description;
     private int categoryId;
     
+    
+    /*
+        this List stores user's items
+    */
+    
+    private List<Item> userItems;
+    
     public ItemBean() {
     }
     
-    
+    /* create item and store to database */
     public String createItem (){
         Item item = new Item(Integer.SIZE, name, description);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
-        return "index";
+        return "myItemList";
     }
 
+    /* this method returns user's all items as  a List */
+    public List<Item> getUserItems () {
+//        userItems = new ArrayList<>();
+//        // get items from database using logged user.
+//        for (Item i : itemController.findAll()) {
+//            if (i.get)
+//        }
+//        userItems.add(null)
+        return itemController.findAll();
+    }
+    
+    
     public String getName() {
         return name;
     }
