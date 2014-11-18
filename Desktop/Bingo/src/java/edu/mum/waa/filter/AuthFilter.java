@@ -48,6 +48,12 @@ public class AuthFilter implements Filter {
             {
                 res.sendRedirect("index.xhtml");
             }
+            if (loginBean != null && !loginBean.isLoggedIn() && loginBean.getUserName() != null && reqURI.indexOf("/login.xhtml") >= 0) 
+            {
+                res.sendRedirect("index.xhtml");
+            }
+            
+            
             chain.doFilter(request, response);
         } catch (Throwable t) {
             System.out.println(t.getMessage());

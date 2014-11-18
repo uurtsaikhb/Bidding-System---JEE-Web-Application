@@ -2,25 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <ui:composition template="/templates/loginLayout.xhtml">
+        <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="windowTitle">
                 #{msgs.loginTitle}
             </ui:define>
 
             <ui:define name="content">
-                <h:form>
-                    <h:outputText value="Username:"/>
-                    <h:inputText value="#{loginBean.userName}" />
-                    <h:outputText value="Password:"/>
-                    
-                    <h:inputSecret value="#{loginBean.userPassword}" />
-                    <h:commandButton value="login" action="#{loginBean.signIn()}" />
-                </h:form>
+                <div class="container">
+                    <div class="column">
+                        <div class="center">
+                            <div class="column_wrap"> 
+                                <h2>Sign in</h2>
+                                <h:form>
+                                    <span class="error_list"></span>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{loginBean.userName}" p:placeholder="Username"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputSecret value="#{loginBean.userPassword}" p:placeholder="Password"/>
+                                    </div>
+                                    <div class="form-row">
+                                        <h:commandLink value="Login" action="#{loginBean.signIn()}" class="btn btn-add"/>
+                                    </div> 
+                                </h:form>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

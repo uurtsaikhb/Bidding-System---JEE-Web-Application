@@ -210,3 +210,145 @@ body
     display: inline-block;
     margin: 0 8px 0 0;
 }
+
+.form-container {
+    min-height: 500px;
+    padding: 40px;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.form-flds-col {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding: 0 100px 18px;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.form-row {
+    margin-bottom: 10px;
+}
+.form-row {
+    clear: left;
+    float: left;
+    width: 100%;
+}
+
+.form-cols-4 {
+    clear: both;
+    margin: 0 -5px;
+}
+
+
+.form-cols-4 .form-col {
+    float: left;
+    padding: 0 5px;
+    width: 100%;
+}
+
+.form-row select {
+    border: 1px solid #cecece;
+    font-size: 13px;
+    padding: 4px;
+    width: 300px;
+}
+
+.form-row label {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+}
+
+.btn-add {
+    background: none repeat scroll 0 0 #e31132;
+    color: #fff;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.form-flds-group{
+    display: inline-block;
+    width: 100%;
+}
+
+.form-row input[type="password"], .form-row input[type="text"], .form-row textarea {
+    border: 1px solid #cbcbcb;
+    border-radius: 1px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+}
+.form-row textarea, .form-row input[type="text"] {
+    color: #333;
+    font-size: 13px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.column {
+    box-sizing: border-box;
+    text-align: center;
+}
+    
+
+
+.column .column_wrap {
+    padding: 40px 50px;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.footer-bottom-bar {
+    background: none repeat scroll 0 0 #282a2b;
+    border-top: 1px solid #4b4c4d;
+    color: #8c8989;
+    font-size: 12px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    height: 40px;
+}
+
+.center{
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+}
+
+.pull-left {
+    float: left;
+}
+
+#content
+{
+    margin-bottom: 10px;
+}
