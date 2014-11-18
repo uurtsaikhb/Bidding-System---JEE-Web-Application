@@ -3,21 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mum.waa.controllers;
+package edu.mum.waa.beans;
 
+import edu.mum.waa.controllers.UserFacadeLocal;
 import edu.mum.waa.models.User;
-import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
  * @author uurtsaikh
  */
-
-@Named("registerBean")
+@Named(value = "userBean")
 @SessionScoped
-public class RegisterBean implements Serializable{
+public class UserBean implements Serializable {
+
+    /**
+     * Creates a new instance of UserBean
+     */
+    
+    @EJB
+    UserFacadeLocal userController;
     
     private String firstname;
     private String lastname;
@@ -26,9 +35,19 @@ public class RegisterBean implements Serializable{
     private String phone;
     private String password;
     
-    public String createUser () {
-        System.out.println("f: " + firstname);
-        return "login";
+    
+    public UserBean() {
+    }
+    
+    
+    public String createUser (){
+        User user = new User(Integer.SIZE, firstname, lastname, username, email, phone, password);
+        userController.create(user);
+        return "index";
+    }
+
+    public List<User> getUser () {
+        return userController.findAll();
     }
     
     public String getFirstname() {
@@ -78,5 +97,4 @@ public class RegisterBean implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
 }

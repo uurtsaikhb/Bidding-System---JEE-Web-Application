@@ -6,35 +6,32 @@
 package edu.mum.waa.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author uurtsaikh
  */
 @Entity
-@Table(name = "category")
+@Table(name = "user_item")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
-    @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
-    @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
-public class Category implements Serializable {
+    @NamedQuery(name = "UserItem.findAll", query = "SELECT u FROM UserItem u"),
+    @NamedQuery(name = "UserItem.findById", query = "SELECT u FROM UserItem u WHERE u.id = :id"),
+    @NamedQuery(name = "UserItem.findByItemId", query = "SELECT u FROM UserItem u WHERE u.itemId = :itemId")})
+public class UserItem implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,22 +40,22 @@ public class Category implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Collection<Item> itemCollection;
+    @Column(name = "item_id")
+    private int itemId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userId;
 
-    public Category() {
+    public UserItem() {
     }
 
-    public Category(Integer id) {
+    public UserItem(Integer id) {
         this.id = id;
     }
 
-    public Category(Integer id, String name) {
+    public UserItem(Integer id, int itemId) {
         this.id = id;
-        this.name = name;
+        this.itemId = itemId;
     }
 
     public Integer getId() {
@@ -69,21 +66,20 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
-    @XmlTransient
-    public Collection<Item> getItemCollection() {
-        return itemCollection;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setItemCollection(Collection<Item> itemCollection) {
-        this.itemCollection = itemCollection;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -96,10 +92,10 @@ public class Category implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Category)) {
+        if (!(object instanceof UserItem)) {
             return false;
         }
-        Category other = (Category) object;
+        UserItem other = (UserItem) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +104,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.mum.waa.models.Category[ id=" + id + " ]";
+        return "edu.mum.waa.models.UserItem[ id=" + id + " ]";
     }
     
 }
