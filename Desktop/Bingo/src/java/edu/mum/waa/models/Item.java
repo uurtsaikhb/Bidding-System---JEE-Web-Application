@@ -6,9 +6,7 @@
 package edu.mum.waa.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,10 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
     @NamedQuery(name = "Item.findById", query = "SELECT i FROM Item i WHERE i.id = :id"),
     @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE i.name = :name"),
-    @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description")})
+    @NamedQuery(name = "Item.findByDescription", query = "SELECT i FROM Item i WHERE i.description = :description"),
+    @NamedQuery(name = "Item.findByAuctionId", query = "SELECT i FROM Item i WHERE i.auctionId = :auctionId")})
 public class Item implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
-    private Collection<Picture> pictureCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,11 +51,13 @@ public class Item implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "description")
     private String description;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "auction_id")
+    private int auctionId;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
-    private Collection<Auction> auctionCollection;
 
     public Item() {
     }
@@ -69,10 +66,11 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public Item(Integer id, String name, String description) {
+    public Item(Integer id, String name, String description, int auctionId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.auctionId = auctionId;
     }
 
     public Integer getId() {
@@ -99,21 +97,20 @@ public class Item implements Serializable {
         this.description = description;
     }
 
+    public int getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(int auctionId) {
+        this.auctionId = auctionId;
+    }
+
     public Category getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
-    }
-
-    @XmlTransient
-    public Collection<Auction> getAuctionCollection() {
-        return auctionCollection;
-    }
-
-    public void setAuctionCollection(Collection<Auction> auctionCollection) {
-        this.auctionCollection = auctionCollection;
     }
 
     @Override
@@ -139,15 +136,6 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return "edu.mum.waa.models.Item[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Picture> getPictureCollection() {
-        return pictureCollection;
-    }
-
-    public void setPictureCollection(Collection<Picture> pictureCollection) {
-        this.pictureCollection = pictureCollection;
     }
     
 }

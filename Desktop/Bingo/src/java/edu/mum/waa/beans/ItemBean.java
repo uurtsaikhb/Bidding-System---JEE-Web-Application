@@ -19,13 +19,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -36,7 +36,7 @@ import org.primefaces.event.FileUploadEvent;
  * @author uurtsaikh
  */
 @Named(value = "itemBean")
-@RequestScoped
+@SessionScoped
 public class ItemBean implements Serializable {
 
     /**
@@ -98,9 +98,9 @@ public class ItemBean implements Serializable {
         }
     }
 
-    public String createItem (int userId){
-        
-        Item item = new Item(Integer.SIZE, name, description);
+    public String createItem() {
+
+        Item item = new Item(Integer.SIZE, name, description, 0);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
 
@@ -108,9 +108,6 @@ public class ItemBean implements Serializable {
             Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
-
-        System.out.println("USer ID : " + Util.getUser().getId());
-        System.out.println("ITEM ID : " + item.getId());
 //        
         UserItem userItem = new UserItem(Integer.SIZE, item.getId());
         userItem.setUserId(Util.getUser());
@@ -140,7 +137,7 @@ public class ItemBean implements Serializable {
 
         chosenItem = itemController.find(itemId);
 
-        return "createAuction";
+        return "createAuction?faces-redirect=true";
     }
 
     public String getName() {

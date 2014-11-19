@@ -84,7 +84,7 @@ public class LoginBean implements Serializable {
                 session.setAttribute("username", userName);
                 session.setAttribute("user", _user);
                 isLoggedIn = true;
-                return "index.xhtml";
+                return "profile?faces-redirect=true";
             }
         }
         // Set login ERROR
@@ -92,6 +92,6 @@ public class LoginBean implements Serializable {
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
-        return "login.xhtml";
+        return "login?faces-redirect=true";
     }
 }
