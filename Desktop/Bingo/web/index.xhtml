@@ -13,7 +13,13 @@
                 #{msgs.title}
             </ui:define>
             <ui:define name="content">
+                        <ui:insert name="menu" >
+                            <ui:include src="/sections/main/menu.xhtml" />
+                        </ui:insert>
                 <div class="container">
+                        <ui:insert name="indexList" >
+                            <ui:include src="/sections/items/indexList.xhtml" />
+                        </ui:insert>
                     #{msgs.loginWelcome}
                     <h:form>
                         <br>
