@@ -105,7 +105,7 @@ public class ItemBean implements Serializable {
         itemController.create(item);
 
         for(File file : files) {
-            Picture picture = new Picture(path + file.getName(), item);
+            Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
 
