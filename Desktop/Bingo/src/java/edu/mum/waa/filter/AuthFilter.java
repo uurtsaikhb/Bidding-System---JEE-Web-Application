@@ -29,8 +29,7 @@ public class AuthFilter implements Filter {
 
     @Inject
     private LoginBean loginBean;
-    
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -38,36 +37,28 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        
-        try 
-        {
+
+        try {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session = req.getSession(false);
 
             String reqURI = req.getRequestURI();
-            if (session != null && (User)session.getAttribute("user") != null) 
-            {
-                if(reqURI.indexOf("login.xhtml") >= 0)
-                {
+            if (session != null && (User) session.getAttribute("user") != null) {
+                if (reqURI.indexOf("login.xhtml") >= 0) {
                     res.sendRedirect("index.xhtml");
                 }
+            } else {
+                if (reqURI.indexOf("/addProduct.xhtml") >= 0) {
+                    res.sendRedirect("login.xhtml");
+                }
+                if (reqURI.indexOf("/profile.xhtml") >= 0) {
+                    res.sendRedirect("login.xhtml");
+                }
             }
-            else
-            if (reqURI.indexOf("/addProduct.xhtml") >= 0) 
-            {
-                res.sendRedirect("login.xhtml");
-            }
-            else 
-            if (reqURI.indexOf("/myItemList.xhtml") >= 0) 
-            {
-                res.sendRedirect("login.xhtml");
-            }
-            
+
             chain.doFilter(request, response);
-        } 
-        catch (IOException | ServletException e) 
-        {
+        } catch (IOException | ServletException e) {
             System.out.println(e.getMessage());
         }
     }

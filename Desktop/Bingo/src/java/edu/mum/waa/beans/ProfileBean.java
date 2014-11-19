@@ -5,9 +5,12 @@
  */
 package edu.mum.waa.beans;
 
+import edu.mum.waa.controllers.AuctionFacade;
+import edu.mum.waa.controllers.AuctionFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
 import edu.mum.waa.controllers.UserItemFacadeLocal;
 import edu.mum.waa.filter.Util;
+import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.Item;
 import edu.mum.waa.models.UserItem;
 import java.io.Serializable;
@@ -38,7 +41,11 @@ public class ProfileBean implements Serializable{
     @EJB
     UserItemFacadeLocal userItemController;
     
+    @EJB
+    AuctionFacadeLocal auctionController;
+    
     private Item selectedItem;
+    private Auction auction;
     
     
     
@@ -74,5 +81,11 @@ public class ProfileBean implements Serializable{
 
     public void setSelectedItem(Item selectedItem) {
         this.selectedItem = selectedItem;
+    }
+    
+    public Auction getAuction(int itemId)
+    {
+        return auctionController.findByItemId(itemController.find(itemId));
+        
     }
 }

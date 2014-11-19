@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Auction.findByBuyoutPrice", query = "SELECT a FROM Auction a WHERE a.buyoutPrice = :buyoutPrice"),
     @NamedQuery(name = "Auction.findByStepPrice", query = "SELECT a FROM Auction a WHERE a.stepPrice = :stepPrice"),
     @NamedQuery(name = "Auction.findByHammerPrice", query = "SELECT a FROM Auction a WHERE a.hammerPrice = :hammerPrice"),
-    @NamedQuery(name = "Auction.findBySellerId", query = "SELECT a FROM Auction a WHERE a.sellerId = :sellerId")})
+    @NamedQuery(name = "Auction.findBySellerId", query = "SELECT a FROM Auction a WHERE a.sellerId = :sellerId"),
+    @NamedQuery(name = "Auction.findByItemId", query = "SELECT a FROM Auction a WHERE a.itemId = :itemId")})
 public class Auction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

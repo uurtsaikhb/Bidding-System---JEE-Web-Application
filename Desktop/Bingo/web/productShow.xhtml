@@ -2,14 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Bingo</title>
     </h:head>
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">     
             <ui:define name="windowTitle">
-                #{msgs.title}
+                #{productBean.item.name}
             </ui:define>
             <ui:define name="content">
                 <ui:insert name="menu" >
@@ -18,45 +20,59 @@
                 <div class="container">
                     <div class="product-show">
                         <div class="photo-view">
-                            <img src="http://www.zar.mn/uploads/orig/dd1a40c9995687be1ae7f3e4f175a60d.jpg" alt="image"/>
+                            <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(productBean.item)}" />
                         </div>
                         <div class="ad-view ">
                             <div class="ad-view-header">
                                 <div class="ad-view-title clearfix">
-                                    <h1 itemprop="name">Lenovo IdeaPad S10-3t 10.1" Notebook</h1>
+                                    <h1 itemprop="name">#{productBean.item.name}</h1>
                                 </div>
-                                <div class="date">2014-11-19</div>
+                                <div class="date">
+                                    <h:outputText value="#{productBean.auction.startingDate}" >
+                                        <f:convertDateTime pattern="EEE, d MMM yyyy" /> />
+                                    </h:outputText>
+                                </div>
                             </div>
                             <div class="ad-info clearfix">
                                 <p class="ad-description">
                                     Description:
-                                    <b>A new, unused item with absolutely no signs of wear. The item may be a factory second or a new, unused item with defects. See the seller’s listing for full details and description of any imperfections.</b>
+                                    <b>#{productBean.item.description}</b>
                                 </p>
                             </div>
                             <div class="ad-info clearfix">
                                 <p class="ad-phone-number">
                                     Start price:
-                                    <b itemprop="price">$   100.00</b>
+                                    <b itemprop="price">$ #{productBean.auction.startingPrice}</b>
                                 </p>
                             </div>
                             <div class="ad-info clearfix">
                                 <p class="ad-price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                     Time Left:
-                                    <b>2h 10m 17s</b>
+                                    <b>
+                                        <h:outputText value="#{productBean.auction.endDate}" >
+                                            <f:converter converterId="edu.mum.RelativeDateTimeConverter" />
+                                        </h:outputText>
+                                    </b>
                                 </p>
                             </div>
-                            <div class="ad-info clearfix">
-                                <p class="ad-phone-number">
-                                    Current price:
-                                    <b itemprop="price">$   123.00</b>
-                                </p>
-                            </div>
-                            <div class="form-row" style="float: right;">
-                                <input id="product_password" type="text" style="width: 80px;" placeholder="Bid" />
-                                <a id="product_edit" class="btn btn-add" onclick="chdt(102996);
-                                        return false;" href="#">Place bid</a>
-                            </div>
-                            <div class="bid-note" id="w1-15-_mtb">Enter US $191.00 or more </div>
+                            <h:form>    
+                                <div class="ad-info clearfix">
+                                    <p class="ad-phone-number">
+                                        Current price:
+                                        <b itemprop="price">$   
+                                            <h:outputText value="#{productBean.takeNewPrice()}" id="myBid"/>  </b>
+                                    </p>
+                                </div>
+                                <div class="form-row" style="float: right;">
+                                    <h:inputText required="true" value="#{productBean.myBid}"  style="width: 80px;"/>
+                                    <h:inputHidden required="true" value="#{productBean.auctionId}"/>
+                                    <h:commandLink value="Place bid" action="#{productBean.createBid}" class="btn btn-add">
+                                        <f:ajax execute="@form" render="myBid message" />
+                                    </h:commandLink>
+                                    <h:outputText value="#{productBean.takeMessage()}" id="message"/>
+                                </div>
+                            </h:form>   
+                            <div class="bid-note" id="w1-15-_mtb">Enter US $#{productBean.auction.hammerPrice + productBean.auction.stepPrice} or more </div>
                         </div>
                     </div>
                 </div>

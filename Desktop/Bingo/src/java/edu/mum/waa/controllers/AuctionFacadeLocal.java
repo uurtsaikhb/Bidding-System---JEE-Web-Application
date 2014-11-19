@@ -6,6 +6,7 @@
 package edu.mum.waa.controllers;
 
 import edu.mum.waa.models.Auction;
+import edu.mum.waa.models.Item;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,8 @@ public interface AuctionFacadeLocal {
     List<Auction> findAll();
 
     List<Auction> findRange(int[] range);
+    
+    Auction findByItemId(Item item);
 
     int count();
     

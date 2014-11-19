@@ -22,7 +22,7 @@ and open the template in the editor.
                             <li>
                                 <h:form>
                                     <c:if test="#{loginBean.user != null}">
-                                        <h:commandLink action="profile">
+                                        <h:commandLink action="profile?faces-redirect=true">
                                             <span>
                                                 #{loginBean.user.username}
                                             </span>
