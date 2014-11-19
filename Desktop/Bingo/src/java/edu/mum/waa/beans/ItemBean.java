@@ -9,6 +9,7 @@ import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
 import edu.mum.waa.controllers.PictureFacadeLocal;
 import edu.mum.waa.controllers.UserItemFacadeLocal;
+import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Item;
 import edu.mum.waa.models.Picture;
 import edu.mum.waa.models.UserItem;
@@ -22,6 +23,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -38,36 +40,33 @@ public class ItemBean implements Serializable {
     /**
      * Creates a new instance of ItemBean
      */
-    
     @EJB
     ItemFacadeLocal itemController; // you can create, update, find items with this controller class.
     @EJB
     PictureFacadeLocal pictureController;
-    
+
     @EJB
     CategoryFacadeLocal categoryController;
     @EJB
     UserItemFacadeLocal userItemController;
-    
+
     private String name;
     private String description;
     private int categoryId;
     private List<File> files = new ArrayList<>();
-    
+
     private String destination = "/Users/uurtsaikh/Downloads/tmp/";
-    
-    
+
     /*
-        this List stores user's items
-    */
-    
+     this List stores user's items
+     */
     private List<Item> userItems;
-    
+
     private Item chosenItem; // chosen item  for make auction
-    
+
     public ItemBean() {
     }
-    
+
     public void upload(FileUploadEvent event) {
         FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -95,45 +94,52 @@ public class ItemBean implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-    
-    public String createItem (int userId){
-        
+
+    public String createItem() {
+
         Item item = new Item(Integer.SIZE, name, description);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
-        for(File file : files) {
+        for (File file : files) {
             Picture picture = new Picture(file.getPath(), item);
             pictureController.create(picture);
         }
-        
-        System.out.println("USER ID : " + userId);
+
+        System.out.println("USer ID : " + Util.getUser().getId());
         System.out.println("ITEM ID : " + item.getId());
-        return "myItemList";
+//        
+        UserItem userItem = new UserItem(Integer.SIZE, item.getId());
+        userItem.setUserId(Util.getUser());
+        userItemController.create(userItem);
+
+        return "myItemList?faces-redirect=true"; //?faces-redirect=true
     }
 
     /* this method returns user's all items as  a List */
-    public List<Item> getUserItems () {
-//        userItems = new ArrayList<>();
-//        // get items from database using logged user.
-//        for (Item i : itemController.findAll()) {
-//            if (i.get)
-//        }
-//        userItems.add(null)
-        return itemController.findAll();
-    }
-    
-    /*
-        this method creates auction on item. 
-    */
-    
-    public String createAuction (int itemId){
+    public List<Item> getUserItems() {
         
+        userItems = new ArrayList<>();
+        // get items from database using logged user.
+        List<UserItem> user_item = userItemController.findAll();
+        for (UserItem ui : user_item) {
+            if (Objects.equals(Util.getUser().getId(), ui.getUserId().getId())) {
+                userItems.add(itemController.find(ui.getItemId()));
+            }
+        }
+        
+        return userItems;
+    }
+
+    /*
+     this method creates auction on item. 
+     */
+    public String createAuction(int itemId) {
+
         chosenItem = itemController.find(itemId);
 
         return "createAuction";
     }
-    
-    
+
     public String getName() {
         return name;
     }
@@ -156,7 +162,7 @@ public class ItemBean implements Serializable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-    }    
+    }
 
     public Item getChosenItem() {
         return chosenItem;
@@ -165,5 +171,5 @@ public class ItemBean implements Serializable {
     public void setChosenItem(Item chosenItem) {
         this.chosenItem = chosenItem;
     }
-    
+
 }
