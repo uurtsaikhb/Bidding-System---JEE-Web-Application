@@ -54,7 +54,7 @@ public class ItemBean implements Serializable {
     private String description;
     private int categoryId;
     private List<File> files = new ArrayList<>();
-    
+
     private final String path = "/resources/uploads";
     private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
     private String destination = servletContext.getRealPath(path);
