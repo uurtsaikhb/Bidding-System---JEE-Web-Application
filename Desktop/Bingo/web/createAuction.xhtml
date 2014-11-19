@@ -16,28 +16,31 @@
             <ui:define name="content">
                 <div class="container">
                     <h:form>
+                        <p></p>
+                        <h2>#{itemBean.chosenItem.name}</h2>
                         <h:graphicImage library="images" name="iphone6.jpg" />
+                        
+                        <p>#{itemBean.chosenItem.description}</p>
+                        
                         <h:panelGrid columns="2">
 
                             Starting price:
-                            <h:inputText value="" size="32"/>
-                            
-                            Step price:
-                            <h:inputText value="" size="32" />
-                            
-                            Buy out Price:
-                            <h:inputText value="" size="32" />
-                            
-                            <h:outputText value="#{itemBean.chosenItem.name}"/>
-                            <h:outputText value="#{itemBean.chosenItem.description}"/>
+                            <h:inputText value="#{auctionBean.startingPrice}" size="32"/>
 
+                            Step price:
+                            <h:inputText value="#{auctionBean.stepPrice}" size="32" />
+
+                            Buy out Price:
+                            <h:inputText value="#{auctionBean.buyoutPrice}" size="32" />
+                            
                             <p:outputLabel for="datetimeStart" value="Datetime:" />
-                            <p:calendar id="datetimeStart" value="#{calendarView.date10}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            <p:calendar id="datetimeStart" value="#{auctionBean.startingDate}" pattern="MM/dd/yyyy HH:mm:ss" />
 
                             <p:outputLabel for="datetimeEnd" value="Datetime:" />
-                            <p:calendar id="datetimeEnd" value="#{calendarView.date10}" pattern="MM/dd/yyyy HH:mm:ss" />
-
+                            <p:calendar id="datetimeEnd" value="#{auctionBean.endDate}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            
                         </h:panelGrid>
+                        <h:commandButton value="Add item" action="#{auctionBean.createAuction(itemBean.chosenItem.id, n.user.id)}" class="btn btn-add"/>
                     </h:form>
                 </div>
             </ui:define>
