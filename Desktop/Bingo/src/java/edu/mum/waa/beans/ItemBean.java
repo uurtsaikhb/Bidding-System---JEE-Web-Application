@@ -36,7 +36,7 @@ import org.primefaces.event.FileUploadEvent;
  * @author uurtsaikh
  */
 @Named(value = "itemBean")
-@RequestScoped
+@SessionScoped
 public class ItemBean implements Serializable {
 
     /**
@@ -108,6 +108,7 @@ public class ItemBean implements Serializable {
             Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
+        files.clear();
 
         System.out.println("USer ID : " + Util.getUser().getId());
         System.out.println("ITEM ID : " + item.getId());
