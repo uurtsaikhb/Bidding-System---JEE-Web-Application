@@ -28,7 +28,11 @@ and open the template in the editor.
                             <ui:repeat value="#{categoryBean.items}" var="item">
                                 <div class="list-item">
                                     <a class="img-wrapper" href="login.xhtml">
-                                        <img src=""/></a>
+                                        <ui:repeat value="#{pictureBean.getItemPictures(item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(item)}" size="1">
+                                            <h:graphicImage value="#{picture.path}" width="160" />
+                                        </ui:repeat>
+                                        <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
+                                    </a>
                                     <div class="item-info">
                                         <h3><a title="Acer">#{item.name}</a>
                                         </h3>

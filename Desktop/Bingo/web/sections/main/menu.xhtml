@@ -21,8 +21,13 @@ and open the template in the editor.
                     <table role="presentation">
                         <tbody role="navigation">
                             <tr role="list">
+                                <td class="section home" role="listitem">
+                                    <h:form>
+                                        <h:commandLink class="rt" action="index?faces-redirect=true" value="Home"></h:commandLink>
+                                    </h:form>
+                                </td>
                                 <ui:repeat value="#{categoryBean.categories}" var="category">
-                                    <td class="section home" role="listitem">
+                                    <td class="section other" role="listitem">
                                     <h:form>
                                         <input type="hidden" name="hidden1" value="#{category.id}" />
                                         <h:commandLink class="rt" action="#{categoryBean.selectedCategory}" value="#{category.name}" ></h:commandLink>
