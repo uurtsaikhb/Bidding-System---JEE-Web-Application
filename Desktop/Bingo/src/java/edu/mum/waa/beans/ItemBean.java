@@ -7,14 +7,23 @@ package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
-import edu.mum.waa.models.Category;
+import edu.mum.waa.controllers.PictureFacadeLocal;
 import edu.mum.waa.models.Item;
+import edu.mum.waa.models.Picture;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.FileUploadEvent;
 
 /**
  *
@@ -30,6 +39,8 @@ public class ItemBean implements Serializable {
     
     @EJB
     ItemFacadeLocal itemController; // you can create, update, find items with this controller class.
+    @EJB
+    PictureFacadeLocal pictureController;
     
     @EJB
     CategoryFacadeLocal categoryController;
@@ -38,6 +49,9 @@ public class ItemBean implements Serializable {
     private String name;
     private String description;
     private int categoryId;
+    private List<File> files = new ArrayList<>();
+    
+    private String destination = "/Users/uurtsaikh/Downloads/tmp/";
     
     
     /*
@@ -46,14 +60,47 @@ public class ItemBean implements Serializable {
     
     private List<Item> userItems;
     
+    private Item chosenItem; // chosen item  for make auction
+    
     public ItemBean() {
     }
     
-    /* create item and store to database */
+    public void upload(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+            copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void copyFile(String fileName, InputStream in) {
+        try {
+            File file = new File(destination + fileName);
+            OutputStream out = new FileOutputStream(file);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            files.add(file);
+            in.close();
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public String createItem (){
         Item item = new Item(Integer.SIZE, name, description);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
+        for(File file : files) {
+            Picture picture = new Picture(file.getPath(), item);
+            pictureController.create(picture);
+        }
         return "myItemList";
     }
 
@@ -66,6 +113,17 @@ public class ItemBean implements Serializable {
 //        }
 //        userItems.add(null)
         return itemController.findAll();
+    }
+    
+    /*
+        this method creates auction on item. 
+    */
+    
+    public String createAuction (int itemId){
+        
+        chosenItem = itemController.find(itemId);
+
+        return "createAuction";
     }
     
     
@@ -92,5 +150,13 @@ public class ItemBean implements Serializable {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }    
+
+    public Item getChosenItem() {
+        return chosenItem;
+    }
+
+    public void setChosenItem(Item chosenItem) {
+        this.chosenItem = chosenItem;
+    }
     
 }

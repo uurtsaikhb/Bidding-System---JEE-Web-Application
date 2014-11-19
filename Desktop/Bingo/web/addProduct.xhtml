@@ -8,7 +8,7 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Bingo</title>
@@ -19,7 +19,7 @@ and open the template in the editor.
                 #{msgs.title}
             </ui:define>
             <ui:define name="content">
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <div class="container">
                         <div class="form-container">
                             <div class="form-flds-col">
@@ -65,8 +65,20 @@ and open the template in the editor.
                                         </div> 
                                     </div>
                                     <div class="form-row"> 
+                                        <div>
+                                            <label>Product Picture:</label>
+                                        </div> 
+                                        <div class="form-cols-4 clearfix ">     
+                                            <div class="form-col product-category-main"> 
+                                                <p:fileUpload fileUploadListener="#{itemBean.upload}" mode="advanced" dragDropSupport="false"
+                                                            multiple="true" update="messages" sizeLimit="1000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                                <p:growl id="messages" showDetail="true" />
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="form-row"> 
                                         <h:commandButton action="#{itemBean.createItem}" value="Add" class="btn btn-add"/>
-                                    </div >
+                                    </div>
                                 </div>
                             </div>
                         </div>
