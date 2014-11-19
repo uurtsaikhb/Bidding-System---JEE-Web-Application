@@ -7,6 +7,7 @@ package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.AuctionFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
+import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.User;
 import javax.inject.Named;
@@ -26,22 +27,21 @@ public class AuctionBean implements Serializable {
     /**
      * Creates a new instance of AuctionBean
      */
-    
     @EJB
     AuctionFacadeLocal auctionController;
-    
+
     @EJB
     ItemFacadeLocal itemController;
     /*
-        this.startingDate = startingDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.startingPrice = startingPrice;
-        this.buyoutPrice = buyoutPrice;
-        this.stepPrice = stepPrice;
-        this.hammerPrice = hammerPrice;
-        this.sellerId = sellerId;
-    */
+     this.startingDate = startingDate;
+     this.endDate = endDate;
+     this.status = status;
+     this.startingPrice = startingPrice;
+     this.buyoutPrice = buyoutPrice;
+     this.stepPrice = stepPrice;
+     this.hammerPrice = hammerPrice;
+     this.sellerId = sellerId;
+     */
     private Date startingDate;
     private Date endDate;
     private int status;
@@ -50,24 +50,24 @@ public class AuctionBean implements Serializable {
     private float stepPrice;
     private float hammerPrice;
     private User seller;
-    
-    
+
     public AuctionBean() {
     }
-    
-    
-    public String createAuction (int itemId, int userId) {
-        
+
+    public String createAuction(int itemId, int userId) {
+
         Auction auction = new Auction(Integer.SIZE);
-            auction.setStartingDate(startingDate);
-            auction.setEndDate(endDate);
-            auction.setStartingPrice(startingPrice);
-            auction.setBuyoutPrice(buyoutPrice);
-            auction.setStepPrice(stepPrice);
-            auction.setItemId(itemController.find(itemId));
-            auction.setSellerId(userId);
+        auction.setStartingDate(startingDate);
+        auction.setEndDate(endDate);
+        auction.setStartingPrice(startingPrice);
+        auction.setBuyoutPrice(buyoutPrice);
+        auction.setStepPrice(stepPrice);
+        auction.setItemId(itemController.find(itemId));
+        auction.setSellerId(userId);
+
         auctionController.create(auction);
-        return "index"; // returns your auction list. 
+
+        return "index?faces-redirect=true"; // returns your auction list. 
     }
 
     public Date getStartingDate() {
