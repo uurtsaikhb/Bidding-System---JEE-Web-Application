@@ -6,10 +6,17 @@
 package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.ItemFacadeLocal;
+import edu.mum.waa.controllers.UserItemFacadeLocal;
+import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Item;
+import edu.mum.waa.models.UserItem;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 /**
  *
  * @author uurtsaikh
@@ -18,8 +25,8 @@ import javax.enterprise.context.RequestScoped;
 
 
 @Named(value = "profileBean")
-@RequestScoped
-public class ProfileBean {
+@SessionScoped
+public class ProfileBean implements Serializable{
 
     /**
      * Creates a new instance of ProfileBean
@@ -28,8 +35,10 @@ public class ProfileBean {
     @EJB
     ItemFacadeLocal itemController;
     
+    @EJB
+    UserItemFacadeLocal userItemController;
     
-    Item chosenItem;
+    private Item selectedItem;
     
     
     
@@ -39,7 +48,31 @@ public class ProfileBean {
     
     public String seeItemDetails (int itemId) {
         
-        chosenItem = itemController.find(itemId);
+        selectedItem = itemController.find(itemId);
+
         return "createAuction?faces-redirect=true";
+    }
+
+    public List<Item> getUserItems() {
+        
+        List<Item> userItems = new ArrayList<>();
+        // get items from database using logged user.
+        List<UserItem> user_item = userItemController.findAll();
+        for (UserItem ui : user_item) {
+            if (Objects.equals(Util.getUser().getId(), ui.getUserId().getId())) {
+                userItems.add(itemController.find(ui.getItemId()));
+            }
+        }
+        
+        return userItems;
+    }
+    
+    
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(Item selectedItem) {
+        this.selectedItem = selectedItem;
     }
 }

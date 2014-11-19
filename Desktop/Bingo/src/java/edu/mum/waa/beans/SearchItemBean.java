@@ -6,6 +6,7 @@
 package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.ItemFacadeLocal;
+import edu.mum.waa.controllers.PictureFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -27,29 +28,45 @@ public class SearchItemBean implements Serializable {
      */
     @EJB
     ItemFacadeLocal itemController;
-    
+
+    @EJB
+    PictureFacadeLocal pictureController;
+
     private String searchText;
     private List<Item> resultItems;
-    
 
     public SearchItemBean() {
     }
-    
-    public List<Item> getResultItems () {
-        
+
+    public List<Item> getResultItems() {
+
         resultItems = new ArrayList<Item>();
-        for (Item i : itemController.findAll()){
-            if (i.getName().toLowerCase().contains(searchText.toString()) || 
-                    i.getDescription().toLowerCase().contains(searchText.toLowerCase())){
+        for (Item i : itemController.findAll()) {
+            if (i.getName().toLowerCase().contains(searchText.toString())
+                    || i.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
                 resultItems.add(i);
             }
-            
+
         }
-        
+
         return resultItems;
     }
 
+    public String getPhotos(int itemId) {
+
+//        try{
+//            return pictureController.find(itemId).getPath();
+//        }catch(Exception e){
+//            System.out.println(e.toString());
+//            return "resources/uploads/black.png";
+//        }
+        System.out.println(itemId);
+//        return pictureController.find(itemId).getPath();
+        return "resources/uploads/pruis.jpg";
+    }
+
     public String getSearchText() {
+        
         return searchText;
     }
 

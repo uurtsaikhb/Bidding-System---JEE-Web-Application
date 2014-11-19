@@ -24,10 +24,7 @@
                                 #{item.description}
                             </h:column>
                             <h:column>
-                                <ui:repeat value="#{item.pictureCollection}" var="picture">
-                                    #{picture.path}
-                                    <h:graphicImage value="#{picture.path}" /><br />
-                                </ui:repeat>
+                                <h:graphicImage value="#{searchItemBean.getPhotos(item.id)}" />
                             </h:column>
                         </h:dataTable>
                     </h:form>

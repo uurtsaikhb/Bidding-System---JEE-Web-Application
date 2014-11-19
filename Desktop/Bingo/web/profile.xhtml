@@ -18,13 +18,13 @@
                     <div class="column">
                         <h2>My item list: </h2>
                         <h:form>
-                            <h:dataTable value="#{itemBean.userItems}" var="item">
+                            <h:dataTable value="#{profileBean.userItems}" var="item">
                                 <h:column>
                                     <f:facet name="header">Name</f:facet>
                                         #{item.name}
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">Desctiption</f:facet>
+                                    <f:facet name="header">Description</f:facet>
                                         #{item.description}
                                 </h:column>
                                 <h:column>
