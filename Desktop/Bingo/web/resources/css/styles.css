@@ -573,3 +573,118 @@ ul
     list-style-type: none;
     padding: 0;
 }
+
+.product-show
+{
+    border:1px solid #eee;
+    width: 100%;
+    display: inline-block;
+    padding: 20px;
+}
+
+.photo-view {
+    float: left;
+    width: 55.5%;
+}
+
+.photo-view {
+    float: left;
+    width: 55.5%;
+    text-align: center;
+}
+
+.photo-view img{
+    width: 95%;
+}
+
+.ad-view {
+    float: right;
+    margin-right: 20px;
+    width: 40%;
+    font-family: "Helvetica neue",Helvetica,Verdana,sans-serif;
+}
+
+.ad-view-header {
+    border-bottom: 1px solid #eee;
+    margin: 0 0 12px;
+    padding: 0 10px 12px 0;
+    position: relative;
+}
+
+.ad-view-header h1 {
+    border-color: #fff;
+    border-radius: 30px;
+    border-style: solid;
+    border-width: 4px 4px 2px;
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    line-height: 24px;
+    margin: 0 0 2px -15px;
+    padding: 8px 10px;
+}
+
+.date {
+    clear: left;
+    color: #888;    
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.ad-view .ad-phone-number {
+    color: #888;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: -0.3px;
+}
+
+.ad-view .ad-description
+{
+    color: #888;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: -0.3px;
+}
+
+.ad-view .ad-phone-number b {
+    color: #333;
+    font-weight: bold;
+}
+
+.ad-view .ad-price b {
+    color: #e31132;
+    font-weight: bold;
+}
+
+.ad-view .ad-description b
+{
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.ad-view .ad-price {
+    color: #888;
+    font-size: 14px;
+    letter-spacing: -0.3px;
+}
+
+.ad-info clearfix
+{
+    content: " ";
+    display: table;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.bid-note {
+  font-family: Verdana !important;
+  font-size: 10px;
+  padding-top: 2px;
+}
