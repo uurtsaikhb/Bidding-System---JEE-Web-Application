@@ -75,8 +75,8 @@ public class LoginBean implements Serializable {
 
     public String checkLogin() {
         System.out.println("USER");
-        List<User> users = userController.findAll();
-        for (User _user : users) {
+        User _user = userController.findByUserNameAndPassword(userName, userPassword);
+        if(_user != null){
             if (userName.equals(_user.getUsername()) && userPassword.equals(_user.getPassword())) 
             {
                 System.out.println("Logged in");

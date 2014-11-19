@@ -6,12 +6,20 @@
 package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.CategoryFacadeLocal;
+import edu.mum.waa.controllers.ItemFacadeLocal;
 import edu.mum.waa.models.Category;
+import edu.mum.waa.models.Item;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -20,21 +28,48 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "categoryBean")
 @RequestScoped
 public class CategoryBean implements Serializable {
+    
 
     /**
      * Creates a new instance of CategoryBean
      */
     @EJB
     CategoryFacadeLocal categoryController;
+    @EJB
+    ItemFacadeLocal itemController;
     
     private List<Category> categories;
+    private List<Item> items;
+    private int categoryId = 0;
     
     public CategoryBean() {
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+    
+    public String selectedCategory()
+    {
+        String id = FacesContext.getCurrentInstance().
+		getExternalContext().getRequestParameterMap().get("hidden1");
+	setCategoryId(Integer.parseInt(id));
+        return "categoryItems";
     }
     
     public List<Category>  getCategories (){
         return categoryController.findAll();
     }
+    
+    public List<Item> getItems()
+    {
+        return itemController.findByCategory((Category)categoryController.find(categoryId));
+    }
+    
   
     
 }

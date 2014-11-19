@@ -6,7 +6,10 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,21 +21,28 @@ and open the template in the editor.
                     <table role="presentation">
                         <tbody role="navigation">
                             <tr role="list">
-                                <td class="section home" role="listitem">
-                                    <a class="rt" href="">Home</a>
-                                </td>
-                                <td class="section active" role="listitem">
+                                <ui:repeat value="#{categoryBean.categories}" var="category">
+                                    <td class="section home" role="listitem">
+                                    <h:form>
+                                        <input type="hidden" name="hidden1" value="#{category.id}" />
+                                        <h:commandLink class="rt" action="#{categoryBean.selectedCategory}" value="#{category.name}" ></h:commandLink>
+                                    </h:form>
+                                    </td>
+                                </ui:repeat>
+                                <!--td class="section active" role="listitem">
                                     <span class="rt">Motors</span>
                                 </td>
                                 <td class="section other" role="listitem">
-                                    <a class="rt" href="">Fashion</a>
+                                    <h:form>
+                                        <h:commandLink class="rt" action="categoryItems?faces-redirect=true" value="Fashion"></h:commandLink>
+                                    </h:form>
                                 </td>
                                 <td class="section other" role="listitem">
                                     <a class="rt" href="">Electronics</a>
                                 </td>
                                 <td class="divider-parent">
                                     <span class="divider"></span>
-                                </td>
+                                </td-->
 
                             </tr>
                         </tbody>

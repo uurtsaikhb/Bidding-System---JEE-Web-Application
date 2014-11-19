@@ -27,6 +27,8 @@ public interface UserFacadeLocal {
     List<User> findAll();
 
     List<User> findRange(int[] range);
+    
+    User findByUserNameAndPassword(String username, String password);
 
     int count();
     

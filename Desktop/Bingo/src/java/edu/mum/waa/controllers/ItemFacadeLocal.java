@@ -5,6 +5,7 @@
  */
 package edu.mum.waa.controllers;
 
+import edu.mum.waa.models.Category;
 import edu.mum.waa.models.Item;
 import java.util.List;
 import javax.ejb.Local;
@@ -27,6 +28,8 @@ public interface ItemFacadeLocal {
     List<Item> findAll();
 
     List<Item> findRange(int[] range);
+    
+    List<Item> findByCategory(Category category);
 
     int count();
     

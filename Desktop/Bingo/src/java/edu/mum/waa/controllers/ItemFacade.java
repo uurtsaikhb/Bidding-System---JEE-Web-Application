@@ -5,10 +5,13 @@
  */
 package edu.mum.waa.controllers;
 
+import edu.mum.waa.models.Category;
 import edu.mum.waa.models.Item;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,15 @@ public class ItemFacade extends AbstractFacade<Item> implements ItemFacadeLocal 
 
     public ItemFacade() {
         super(Item.class);
+    }
+
+    @Override
+    public List<Item> findByCategory(Category category) 
+    {
+        Query query = em.createNamedQuery("Item.finByCategoryId", Item.class);
+        query.setParameter("categoryId", category);
+
+        return (List<Item>)query.getResultList();
     }
     
 }
