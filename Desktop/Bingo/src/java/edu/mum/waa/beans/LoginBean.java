@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -89,7 +88,7 @@ public class LoginBean implements Serializable {
             }
         }
         // Set login ERROR
-        FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
+        FacesMessage msg = new FacesMessage("Email Address or Password were not found!!!", "ERROR MSG");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
