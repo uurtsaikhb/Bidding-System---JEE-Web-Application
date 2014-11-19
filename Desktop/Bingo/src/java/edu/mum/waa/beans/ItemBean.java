@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
@@ -34,7 +35,7 @@ import org.primefaces.event.FileUploadEvent;
  * @author uurtsaikh
  */
 @Named(value = "itemBean")
-@SessionScoped
+@RequestScoped
 public class ItemBean implements Serializable {
 
     /**
