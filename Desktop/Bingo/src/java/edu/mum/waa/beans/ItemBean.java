@@ -8,8 +8,10 @@ package edu.mum.waa.beans;
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
 import edu.mum.waa.controllers.PictureFacadeLocal;
+import edu.mum.waa.controllers.UserItemFacadeLocal;
 import edu.mum.waa.models.Item;
 import edu.mum.waa.models.Picture;
+import edu.mum.waa.models.UserItem;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,7 +46,8 @@ public class ItemBean implements Serializable {
     
     @EJB
     CategoryFacadeLocal categoryController;
-    
+    @EJB
+    UserItemFacadeLocal userItemController;
     
     private String name;
     private String description;
@@ -93,7 +96,8 @@ public class ItemBean implements Serializable {
         }
     }
     
-    public String createItem (){
+    public String createItem (int userId){
+        
         Item item = new Item(Integer.SIZE, name, description);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
@@ -101,6 +105,9 @@ public class ItemBean implements Serializable {
             Picture picture = new Picture(file.getPath(), item);
             pictureController.create(picture);
         }
+        
+        System.out.println("USER ID : " + userId);
+        System.out.println("ITEM ID : " + item.getId());
         return "myItemList";
     }
 
