@@ -43,7 +43,7 @@ public class UserBean implements Serializable {
     public String createUser (){
         User user = new User(Integer.SIZE, firstname, lastname, username, email, phone, password);
         userController.create(user);
-        return "index";
+        return "login?faces-redirect=true";
     }
 
     public List<User> getUser () {

@@ -559,3 +559,17 @@ tbody
     color: #0654ba;
     text-decoration: underline;
 }
+
+.error {
+    color: #e31132;
+    font-family: Arial,sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+ul
+{
+    list-style-type: none;
+    padding: 0;
+}
