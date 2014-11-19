@@ -7,8 +7,8 @@ package edu.mum.waa.beans;
 
 import edu.mum.waa.controllers.AuctionFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
-import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Auction;
+import edu.mum.waa.models.Item;
 import edu.mum.waa.models.User;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -56,17 +56,23 @@ public class AuctionBean implements Serializable {
 
     public String createAuction(int itemId, int userId) {
 
+        /*  this following line codes are creating new auction on item */
         Auction auction = new Auction(Integer.SIZE);
-        auction.setStartingDate(startingDate);
-        auction.setEndDate(endDate);
-        auction.setStartingPrice(startingPrice);
-        auction.setBuyoutPrice(buyoutPrice);
-        auction.setStepPrice(stepPrice);
-        auction.setItemId(itemController.find(itemId));
-        auction.setSellerId(userId);
-
+            auction.setStartingDate(startingDate);
+            auction.setEndDate(endDate);
+            auction.setStartingPrice(startingPrice);
+            auction.setBuyoutPrice(buyoutPrice);
+            auction.setStepPrice(stepPrice);
+            auction.setItemId(itemController.find(itemId));
+            auction.setSellerId(userId);
         auctionController.create(auction);
-
+        
+        /* following line codes are updating Item in database. - adding auction number in Item table in 
+           database. 
+        */
+        Item tempItem = itemController.find(itemId);
+            tempItem.setAuctionId(auction.getId());
+        itemController.edit(tempItem);
         return "index?faces-redirect=true"; // returns your auction list. 
     }
 

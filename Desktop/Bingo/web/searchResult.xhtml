@@ -15,22 +15,58 @@
 
             <ui:define name="content">
                 <div class="container">
-                    <h:form>
-                        <h:dataTable value="#{searchItemBean.resultItems}" var="item">
-                            <h:column>
-                                #{item.name}
-                            </h:column>
-                            <h:column>
-                                #{item.description}
-                            </h:column>
-                            <h:column>
-                                <ui:repeat value="#{item.pictureCollection}" var="picture">
-                                    <h:graphicImage value="#{picture.path}" /><br />
-                                </ui:repeat>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
+                    <div class="list-items">
+                        <p> </p>
+                        <ui:repeat value="#{searchItemBean.resultItems}" var="item">
+                            <div class="list-item">
+                                <a class="img-wrapper" href="login.xhtml">
+                                    <ui:repeat value="#{pictureBean.getItemPictures(item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(item)}" size="1">
+                                        <h:graphicImage value="#{picture.path}" width="160" />
+                                    </ui:repeat>
+                                    <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
+                                </a>
+                                <div class="item-info">
+                                    <h3><a title="Acer">#{item.name}</a></h3>
+                                    #{item.description}
+                                    <div class="dd-deal-price">
+                                        <span> $349.99</span>
+                                    </div>
+                                    <div class="dd-list-price">
+                                        <span> $599.99</span>
+                                        | 42% OFF
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+
+                    <center>
+                        <ul class="pagination">
+                            <li class="disabled">
+                                <span>«</span>
+                            </li>
+                            <li class="active">
+                                <span>1</span>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a rel="next" href="#">»</a>
+                            </li>
+                        </ul>
+                    </center>
                 </div>
+                
             </ui:define>
         </ui:composition>
     </h:body>
