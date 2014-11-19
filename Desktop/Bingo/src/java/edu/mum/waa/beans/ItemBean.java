@@ -108,6 +108,7 @@ public class ItemBean implements Serializable {
             Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
+        files.clear();
 //        
         UserItem userItem = new UserItem(Integer.SIZE, item.getId());
         userItem.setUserId(Util.getUser());
