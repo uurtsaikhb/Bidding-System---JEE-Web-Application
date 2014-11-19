@@ -16,7 +16,11 @@
             <ui:define name="content">
                 <div class="container">
                     <div class="list-items">
-                        
+                        <p>
+                            <h:form>
+                                <h:commandLink value="My auctions" action="myAuction?faces-redirect=true"/>
+                            </h:form>
+                        </p>
                         <ui:repeat value="#{itemBean.userItems}" var="item">
                             <div class="list-item">
                                 <a class="img-wrapper" href="login.xhtml">
@@ -27,7 +31,7 @@
                                 </a>
                                 <div class="item-info">
                                     <h3><a title="Acer">#{item.name}</a></h3>
-                                    #{item.description}
+                                        #{item.description}
                                     <h:form>
                                         <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="make auction"/>
                                     </h:form>
