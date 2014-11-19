@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>My Page</title>
     </h:head>
@@ -30,8 +30,11 @@
                                     <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
                                 </a>
                                 <div class="item-info">
-                                    <h3><a title="Acer">#{item.name}</a></h3>
-                                        #{item.description}
+                                    <h3>
+                                        <a title="Acer">#{item.name}</a>
+                                    </h3>
+                                    #{item.description}
+
                                     <h:form>
                                         <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="Sell Item"/>
                                     </h:form>

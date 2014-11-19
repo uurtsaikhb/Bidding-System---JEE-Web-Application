@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>My Auctions</title>
     </h:head>
@@ -13,10 +14,45 @@
             </ui:define>
             <ui:define name="content">
                 <div class="container">
-                    <p>MY AUCTIONS</p>
-                    <ui:repeat value="#{myAuctionBean.auctions}" var="auction">
-                        #{auction.buyoutPrice}
-                    </ui:repeat>
+                    <div class="container">
+                        <div class="list-items">
+                            <p>MY AUCTIONS</p>
+                            <ui:repeat value="#{myAuctionBean.auctions}" var="auction">
+                                <div class="list-item">
+                                    <a class="img-wrapper" href="login.xhtml">
+                                        <ui:repeat value="#{pictureBean.getItemPictures(auction.itemId)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(auction.itemId)}" size="1">
+                                            <h:graphicImage value="#{picture.path}" width="160" />
+                                        </ui:repeat>
+                                        <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(auction.itemId)}" />
+                                    </a>
+                                    <div class="item-info">
+                                        <h3><a title="Acer">#{auction.itemId.name}</a></h3>
+                                        <br>
+                                            <span style="font-size: 12px; color: #E31132">
+                                                <span style="color: #777777">Start date:</span>
+                                                <h:outputText value="#{auction.startingDate}">
+                                                    <f:convertDateTime pattern="MM/dd/yy hh:mm:ss"/>
+                                                </h:outputText>
+                                            </span>
+                                        </br>
+                                        <span style="font-size: 12px; color: #E31132">
+                                            <span style="color: #777777">End date:</span>
+                                            <h:outputText value="#{auction.endDate}">
+                                                <f:convertDateTime pattern="MM/dd/yy hh:mm:ss"/>
+                                            </h:outputText>
+                                        </span>
+                                        <div class="dd-deal-price">
+                                            <span> $#{auction.startingPrice}</span>
+                                        </div>
+                                        <div class="dd-list-price">
+                                            <span> $#{auction.buyoutPrice}</span>
+                                            | $#{auction.stepPrice} STEP
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>

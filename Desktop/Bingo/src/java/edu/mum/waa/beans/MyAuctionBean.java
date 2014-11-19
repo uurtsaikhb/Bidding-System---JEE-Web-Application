@@ -27,22 +27,19 @@ public class MyAuctionBean implements Serializable {
     /**
      * Creates a new instance of MyAuctionBean
      */
-    
     @EJB
     AuctionFacadeLocal auctionController;
-    
+
     private List<Auction> auctions;
-    private Item item;
     private Auction auction;
-    
-    
+
     public MyAuctionBean() {
     }
 
     public List<Auction> getAuctions() {
         auctions = new ArrayList<>();
-        for (Auction a : auctionController.findAll()){
-            if(a.getSellerId() == Util.getUser().getId()){
+        for (Auction a : auctionController.findAll()) {
+            if (a.getSellerId() == Util.getUser().getId()) {
                 auctions.add(a);
             }
         }
@@ -53,12 +50,9 @@ public class MyAuctionBean implements Serializable {
         this.auctions = auctions;
     }
 
-    public Item getItem(int auctionId) {
-        return auctionController.find(auctionId).getItemId();
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
+    public void displayId(int auctionId) {
+        System.out.println("AUCTION ID : " + auctionId);
+        System.out.println("ITEM ID : " + auctionController.find(auctionId).getItemId().getId());
     }
 
     public Auction getAuction() {
@@ -68,5 +62,5 @@ public class MyAuctionBean implements Serializable {
     public void setAuction(Auction auction) {
         this.auction = auction;
     }
-    
+
 }
