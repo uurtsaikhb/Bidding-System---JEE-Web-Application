@@ -20,6 +20,16 @@
                         <ui:insert name="indexList" >
                             <ui:include src="/sections/items/indexList.xhtml" />
                         </ui:insert>
+                    #{msgs.loginWelcome}
+                    <h:form>
+                        <br>
+                            <c:if test="#{loginBean.user != null}">
+                                <h:commandLink value="My items" action="myItemList" />
+                            </c:if>
+                            
+                        </br>
+                        <h:commandLink value="Signup!" action="register"/>
+                    </h:form>
                 </div>
             </ui:define>
         </ui:composition>
