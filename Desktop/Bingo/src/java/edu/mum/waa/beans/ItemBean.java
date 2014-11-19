@@ -23,6 +23,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -51,8 +52,9 @@ public class ItemBean implements Serializable {
     private int categoryId;
     private List<File> files = new ArrayList<>();
     
-    private String destination = "/Users/javkhlant/Downloads/tmp/";
-    
+    private final String path = "/resources/uploads";
+    private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+    private String destination = servletContext.getRealPath(path);
     
     /*
         this List stores user's items
@@ -69,13 +71,13 @@ public class ItemBean implements Serializable {
         try {
             copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     public void copyFile(String fileName, InputStream in) {
         try {
-            File file = new File(destination + fileName);
+            File file = new File(destination + File.separator + fileName);
             OutputStream out = new FileOutputStream(file);
             int read = 0;
             byte[] bytes = new byte[1024];
