@@ -23,6 +23,12 @@
                             <h:column>
                                 #{item.description}
                             </h:column>
+                            <h:column>
+                                <ui:repeat value="#{item.pictureCollection}" var="picture">
+                                    #{picture.path}
+                                    <h:graphicImage value="#{picture.path}" /><br />
+                                </ui:repeat>
+                            </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>

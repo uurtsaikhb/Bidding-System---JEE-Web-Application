@@ -55,9 +55,9 @@ public class ItemBean implements Serializable {
     private int categoryId;
     private List<File> files = new ArrayList<>();
 
-    private final String path = "/resources/uploads";
+    private final String path = "resources" + File.separator + "uploads";
     private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-    private String destination = servletContext.getRealPath(path);
+    private String destination = servletContext.getRealPath(File.separator + path);
     
     /*
         this List stores user's items
@@ -104,7 +104,7 @@ public class ItemBean implements Serializable {
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
         for(File file : files) {
-            Picture picture = new Picture(file.getPath(), item);
+            Picture picture = new Picture(path + file.getName(), item);
             pictureController.create(picture);
         }
         
