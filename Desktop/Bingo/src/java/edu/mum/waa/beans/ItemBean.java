@@ -28,6 +28,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -56,13 +57,14 @@ public class ItemBean implements Serializable {
     private int categoryId;
     private List<File> files = new ArrayList<>();
 
-    private String destination = "/Users/uurtsaikh/Downloads/tmp/";
-
+    private final String path = "resources" + File.separator + "uploads";
+    private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+    private String destination = servletContext.getRealPath(File.separator + path);
     /*
      this List stores user's items
      */
     private List<Item> userItems;
-
+    
     private Item chosenItem; // chosen item  for make auction
 
     public ItemBean() {
@@ -74,13 +76,13 @@ public class ItemBean implements Serializable {
         try {
             copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     public void copyFile(String fileName, InputStream in) {
         try {
-            File file = new File(destination + fileName);
+            File file = new File(destination + File.separator + fileName);
             OutputStream out = new FileOutputStream(file);
             int read = 0;
             byte[] bytes = new byte[1024];
@@ -101,8 +103,9 @@ public class ItemBean implements Serializable {
         Item item = new Item(Integer.SIZE, name, description, 0);
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
-        for (File file : files) {
-            Picture picture = new Picture(file.getPath(), item);
+
+        for(File file : files) {
+            Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
 //        
@@ -113,7 +116,6 @@ public class ItemBean implements Serializable {
         return "myItemList?faces-redirect=true"; //?faces-redirect=true
     }
 
-    /* this method returns user's all items as  a List */
     public List<Item> getUserItems() {
         
         userItems = new ArrayList<>();
@@ -160,7 +162,7 @@ public class ItemBean implements Serializable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-    }
+    }    
 
     public Item getChosenItem() {
         return chosenItem;
@@ -169,5 +171,4 @@ public class ItemBean implements Serializable {
     public void setChosenItem(Item chosenItem) {
         this.chosenItem = chosenItem;
     }
-
 }
