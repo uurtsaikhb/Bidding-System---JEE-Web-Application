@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -112,9 +111,11 @@ public class ItemBean implements Serializable {
 //        
         UserItem userItem = new UserItem(Integer.SIZE, item.getId());
         userItem.setUserId(Util.getUser());
+        
+        System.out.println("USER ID : " + Util.getUser().getFirstname());
         userItemController.create(userItem);
 
-        return "myItemList?faces-redirect=true"; //?faces-redirect=true
+        return "profile?faces-redirect=true"; //?faces-redirect=true
     }
 
     public List<Item> getUserItems() {
