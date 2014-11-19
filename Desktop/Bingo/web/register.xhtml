@@ -19,17 +19,37 @@
 
             <ui:define name="content">
                 <div class="container">
-                    <h:form>
-                        <h:panelGrid columns="1">
-                            <h:inputText value="#{userBean.firstname}" p:placeholder="#{msgs.firstname}"/>
-                            <h:inputText value="#{userBean.lastname}" p:placeholder="#{msgs.lastname}"/>
-                            <h:inputText value="#{userBean.username}" size="25" p:placeholder="#{msgs.userName}"/>
-                            <h:inputText value="#{userBean.email}" size="25" p:placeholder="#{msgs.email}" />
-                            <h:inputText value="#{userBean.phone}" p:placeholder="#{msgs.phone}"/>
-                            <h:inputSecret value="#{userBean.password}" p:placeholder="#{msgs.password}"/>
-                        </h:panelGrid>
-                        <h:commandButton value="#{msgs.signup}" action="#{userBean.createUser}"/>
-                    </h:form>
+                    <div class="column">
+                        <div class="center">
+                            <div class="column_wrap"> 
+                                <h2>Register</h2>
+                                <h:form>
+                                    <span class="error_list"></span>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{userBean.firstname}" p:placeholder="#{msgs.firstname}"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{userBean.lastname}" p:placeholder="#{msgs.lastname}"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{userBean.username}" size="25" p:placeholder="#{msgs.userName}"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{userBean.email}" size="25" p:placeholder="#{msgs.email}" />
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputText value="#{userBean.phone}" p:placeholder="#{msgs.phone}"/>
+                                    </div>
+                                    <div class="form-row"> 
+                                        <h:inputSecret value="#{userBean.password}" p:placeholder="#{msgs.password}"/>
+                                    </div>
+                                    <div class="form-row">
+                                        <h:commandButton value="#{msgs.signup}" action="#{userBean.createUser}" class="btn btn-add"/>
+                                    </div> 
+                                </h:form>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
             </ui:define>
             <ui:define name="footing">
