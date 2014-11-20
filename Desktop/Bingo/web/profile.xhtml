@@ -40,13 +40,10 @@
                                         <h:commandButton class="btn btn-add" action="#{profileBean.seeItemDetails(item.id)}" value="Sell"/>
                                         <!--<h:commandLink action="" value="Detail"/>-->
                                     </h:form>
-                                    <div class="dd-deal-price">
-                                        <span> 1</span>
-                                    </div>
-                                    <div class="dd-list-price">
-                                        <span> $599.99</span>
-                                        | 42% OFF
-                                    </div>
+                                    <h:form>
+                                        <h:commandButton class="btn btn-add" action="#{profileBean.seeItemDetails(item.id)}" value="Detail"/>
+                                        <!--<h:commandLink action="" value="Detail"/>-->
+                                    </h:form>
                                 </div>
                             </div>
                         </ui:repeat>
