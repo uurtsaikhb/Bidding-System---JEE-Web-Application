@@ -21,7 +21,9 @@
                 <div class="container">
                     <div class="product-show">
                         <div class="photo-view">
-                            <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(productBean.item)}" />
+                            <ui:repeat value="#{pictureBean.getItemPictures(productBean.item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(productBean.item)}" size="1">
+                                <h:graphicImage value="#{picture.path}" width="160" />
+                            </ui:repeat>
                         </div>
                         <div class="ad-view ">
                             <div class="ad-view-header">
@@ -80,7 +82,7 @@
                 </div>
             </ui:define>
         </ui:composition>
-        
+
         <script type="text/javascript">
             var webSocket =
                     new WebSocket('ws://localhost:8080/Bingo/websocket');
