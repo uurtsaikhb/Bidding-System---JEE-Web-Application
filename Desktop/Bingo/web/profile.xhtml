@@ -39,10 +39,11 @@
                                     #{item.description}
                                     
                                     <h:form>
-                                        <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="Sell an Item"/>
+                                        <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="Sell"/>
+                                        <!--<h:commandLink action="" value="Detail"/>-->
                                     </h:form>
                                     <div class="dd-deal-price">
-                                        <span> $#{profileBean.getAuction(item.id).startingPrice}</span>
+                                        <span> 1</span>
                                     </div>
                                     <div class="dd-list-price">
                                         <span> $599.99</span>

@@ -8,6 +8,7 @@ package edu.mum.waa.beans;
 import edu.mum.waa.controllers.AuctionFacadeLocal;
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
+import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.Category;
 import edu.mum.waa.models.Item;
@@ -76,7 +77,7 @@ public class CategoryBean implements Serializable {
         for(Item ite: itemController.findByCategory((Category)categoryController.find(categoryId)))
         {
             Auction auction = auctionController.findByItemId(ite);
-            if(auction.getStatus() == 0)
+            if(auction.getStatus() == Util.AUCTION_STATUS_STARTED)
             {
                 items.add(ite);
             }
