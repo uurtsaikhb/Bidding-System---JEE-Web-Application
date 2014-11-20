@@ -97,13 +97,19 @@ public class ProductBean implements Serializable{
     public void createBid()
     {
         Auction auct = auctionController.find(auctionId);
-        Bid bid = new Bid(Integer.SIZE, auct.getId(), myBid, (int)auct.getHammerPrice() + myBid, new Date());
+        Bid bid = new Bid(Integer.SIZE, auct.getId(), (int) (myBid - auct.getHammerPrice()), myBid, new Date());
         bid.setBuyerId(Util.getUser());
         bidController.create(bid);
         
-        auct.setHammerPrice(myBid + auct.getBuyoutPrice());
+        auct.setHammerPrice(myBid);
         auctionController.edit(auct);
         
+    }
+    
+    public String takePossoblePrice()
+    {
+        Auction auct = auctionController.find(auctionId);
+        return ((int)auct.getHammerPrice() + auct.getStepPrice()) + "";
     }
     
     public String takeNewPrice()

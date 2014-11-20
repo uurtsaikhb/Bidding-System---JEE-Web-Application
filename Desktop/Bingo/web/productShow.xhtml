@@ -70,13 +70,12 @@
                                     <h:inputText required="true" value="#{productBean.myBid}"  style="width: 80px;" id="bidder"/>
                                     <h:inputHidden required="true" value="#{productBean.auctionId}"/>
                                     <h:commandLink value="Place bid" action="#{productBean.createBid}" class="btn btn-add">
-                                        <f:ajax execute="@form" render="myBid message" onevent="send()"/>
+                                        <f:ajax execute="@form" render="myBid message possoble" onevent="send()"/>
                                     </h:commandLink>
                                     <h:outputText value="#{productBean.takeMessage()}" id="message"/>
-                                    <div id="messages"></div>
                                 </div>
+                                <div class="bid-note" id="w1-15-_mtb">Enter US $<h:outputText value="#{productBean.takePossoblePrice()}" id="possoble"/> or more </div>
                             </h:form>   
-                            <div class="bid-note" id="w1-15-_mtb">Enter US $#{productBean.auction.hammerPrice + productBean.auction.stepPrice} or more </div>
                         </div>
                     </div>
                 </div>
@@ -100,11 +99,11 @@
             };
 
             function onMessage(event) {
-                document.getElementById('j_idt60:myBid').innerHTML = event.data;
+                document.getElementById('j_idt61:myBid').innerHTML = event.data;
             }
 
             function onOpen(event) {
-                document.getElementById('messages').innerHTML = 'Connection established';
+
             }
 
             function onError(event) {
@@ -112,7 +111,7 @@
             }
 
             function send() {
-                var txt = document.getElementById('j_idt60:bidder').value;
+                var txt = document.getElementById('j_idt61:bidder').value;
                 webSocket.send(txt);
                 return false;
             }
