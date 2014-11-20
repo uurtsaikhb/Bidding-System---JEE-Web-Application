@@ -15,37 +15,44 @@
 
             <ui:define name="content">
                 <div class="container">
+                    <div class="create_auction">
                     <h:form>
-                        <p></p>
-                        <h2>#{profileBean.selectedItem.name}</h2>
+                        <div class="left_container">
+                            <h2>#{profileBean.selectedItem.name}</h2>
+
+                            <ui:repeat value="#{pictureBean.getItemPictures(profileBean.selectedItem)}" 
+                                       var="picture" rendered="#{not empty pictureBean.getItemPictures(profileBean.selectedItem)}" size="1">
+                                <h:graphicImage value="#{picture.path}" width="160" styleClass="big_image"/>
+                            </ui:repeat>
+                        </div>
+                        <div class="right_container">
+                            <p class='description'>#{profileBean.selectedItem.description}</p>
+                            <table>
+                                <tr class="table_row">
+                                    <td><span class="form_label">Starting price:</span></td>
+                                    <td><div class="form-row"><h:inputText value="#{auctionBean.startingPrice}" size="32"/></div></td>
+                                </tr>
+                                <tr class="table_row">
+                                    <td><span class="form_label">Step price:</span></td><td><div class="form-row"><h:inputText value="#{auctionBean.stepPrice}" size="32" /></div></td>
+                                </tr>
+                                <tr><td><span class="form_label">Buy out Price:</span></td><td><div class="form-row"><h:inputText value="#{auctionBean.buyoutPrice}" size="32" /></div></td></tr>
+                                <tr class="table_row">
+                                    <td><p:outputLabel for="datetimeStart" value="Datetime:" styleClass="form_label"/></td>
+                                    <td><p:calendar id="datetimeStart" value="#{auctionBean.startingDate}" pattern="MM/dd/yyyy HH:mm:ss" /></td>
+                                </tr>
+                                <tr class="table_row">
+                                    <td><p:outputLabel for="datetimeEnd" value="Datetime:" styleClass="form_label"/></td>
+                                    <td><p:calendar id="datetimeEnd" value="#{auctionBean.endDate}" pattern="MM/dd/yyyy HH:mm:ss" /></td>
+                                </tr>
+                                <tr class="table_row">
+                                    <td colspan="2"><h:commandButton value="Add Auction" action="#{auctionBean.createAuction(profileBean.selectedItem.id, loginBean.user.id)}" class="btn btn-add"/></td>
+                                </tr>
+                            </table>
+                        </div>
                         
-                        <ui:repeat value="#{pictureBean.getItemPictures(profileBean.selectedItem)}" 
-                                   var="picture" rendered="#{not empty pictureBean.getItemPictures(profileBean.selectedItem)}" size="1">
-                            <h:graphicImage value="#{picture.path}" width="160" />
-                        </ui:repeat>
-                        
-                        <p>#{profileBean.selectedItem.description}</p>
-
-                        <h:panelGrid columns="2">
-
-                            Starting price:
-                            <h:inputText value="#{auctionBean.startingPrice}" size="32"/>
-
-                            Step price:
-                            <h:inputText value="#{auctionBean.stepPrice}" size="32" />
-
-                            Buy out Price:
-                            <h:inputText value="#{auctionBean.buyoutPrice}" size="32" />
-
-                            <p:outputLabel for="datetimeStart" value="Datetime:" />
-                            <p:calendar id="datetimeStart" value="#{auctionBean.startingDate}" pattern="MM/dd/yyyy HH:mm:ss" />
-
-                            <p:outputLabel for="datetimeEnd" value="Datetime:" />
-                            <p:calendar id="datetimeEnd" value="#{auctionBean.endDate}" pattern="MM/dd/yyyy HH:mm:ss" />
-
-                        </h:panelGrid>
-                        <h:commandButton value="Add Auction" action="#{auctionBean.createAuction(profileBean.selectedItem.id, loginBean.user.id)}" class="btn btn-add"/>
                     </h:form>
+                    </div>
+                    <br class="clear" />
                 </div>
             </ui:define>
         </ui:composition>

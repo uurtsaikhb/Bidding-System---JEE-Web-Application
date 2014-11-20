@@ -709,3 +709,41 @@ ul
 .ui-widget {
     font-size: 12px !important;
 }
+
+.create_autcion{}
+
+.create_auction .left_container{
+    width: 400px;
+    max-width: 400px;
+    float: left;
+}
+
+.create_auction .big_image{
+    width: 400px;
+    max-width: 400px;
+}
+
+.create_auction .right_container{
+    width: 550px;
+    float: left;
+    padding-top: 20px;
+}
+
+.create_auction .description{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.clear{
+    clear: both;
+}
+
+.create_auction .table_row{
+    height: 35px;
+    line-height: 35px;
+}
+
+.create_auction .form_label{
+    margin-right: 10px;
+    font-size: 15px !important;
+}
