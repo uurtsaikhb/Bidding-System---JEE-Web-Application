@@ -23,7 +23,9 @@ and open the template in the editor.
                             <h:form>
                                 <input type="hidden" name="itemId" value="#{item.id}" />
                                 <h:commandLink action="#{productBean.selectedItem}" class="img-wrapper">
-                                    <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
+                                    <ui:repeat value="#{pictureBean.getItemPictures(item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(item)}" size="1">
+                                        <h:graphicImage value="#{picture.path}" width="160" />
+                                    </ui:repeat>
                                 </h:commandLink>
                             </h:form>
                             <div class="item-info">
