@@ -15,6 +15,10 @@ import javax.servlet.http.HttpSession;
  * @author mandal
  */
 public class Util {
+    
+    public static final int AUCTION_STATUS_NOT_STARTED = 0;
+    public static final int AUCTION_STATUS_STARTED = 1;
+    public static final int AUCTION_STATUS_FINISHED = 2;
 
     public static HttpSession getSession() {
         return (HttpSession) FacesContext.

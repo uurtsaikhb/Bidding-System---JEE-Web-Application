@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Bingo</title>
     </h:head>
@@ -64,12 +65,13 @@
                                     </p>
                                 </div>
                                 <div class="form-row" style="float: right;">
-                                    <h:inputText required="true" value="#{productBean.myBid}"  style="width: 80px;"/>
+                                    <h:inputText required="true" value="#{productBean.myBid}"  style="width: 80px;" id="bidder"/>
                                     <h:inputHidden required="true" value="#{productBean.auctionId}"/>
                                     <h:commandLink value="Place bid" action="#{productBean.createBid}" class="btn btn-add">
-                                        <f:ajax execute="@form" render="myBid message" />
+                                        <f:ajax execute="@form" render="myBid message" onevent="send()"/>
                                     </h:commandLink>
                                     <h:outputText value="#{productBean.takeMessage()}" id="message"/>
+                                    <div id="messages"></div>
                                 </div>
                             </h:form>   
                             <div class="bid-note" id="w1-15-_mtb">Enter US $#{productBean.auction.hammerPrice + productBean.auction.stepPrice} or more </div>
@@ -78,6 +80,41 @@
                 </div>
             </ui:define>
         </ui:composition>
+        
+        <script type="text/javascript">
+            var webSocket =
+                    new WebSocket('ws://localhost:8080/Bingo/websocket');
+
+            webSocket.onerror = function (event) {
+                onError(event)
+            };
+
+            webSocket.onopen = function (event) {
+                onOpen(event)
+            };
+
+            webSocket.onmessage = function (event) {
+                onMessage(event)
+            };
+
+            function onMessage(event) {
+                document.getElementById('j_idt60:myBid').innerHTML = event.data;
+            }
+
+            function onOpen(event) {
+                document.getElementById('messages').innerHTML = 'Connection established';
+            }
+
+            function onError(event) {
+                alert(event.data);
+            }
+
+            function send() {
+                var txt = document.getElementById('j_idt60:bidder').value;
+                webSocket.send(txt);
+                return false;
+            }
+        </script>
     </h:body>
 </html>
 

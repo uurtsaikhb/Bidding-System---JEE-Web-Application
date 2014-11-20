@@ -39,5 +39,12 @@ public class ItemFacade extends AbstractFacade<Item> implements ItemFacadeLocal 
 
         return (List<Item>)query.getResultList();
     }
+
+    @Override
+    public List<Item> findForIndex() {
+        Query query = em.createNamedQuery("Item.findForIndex", Item.class);
+
+        return (List<Item>)query.getResultList();
+    }
     
 }

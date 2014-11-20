@@ -6,7 +6,10 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,66 +18,40 @@ and open the template in the editor.
         <ui:composition>
             <div class="container">
                 <div class="list-items">
-                    <div class="list-item">
-                        <a class="img-wrapper" href="login.xhtml">
-                            <img src="http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/t34AAOSwMKpUaMYo/$_106.JPG"/></a>
-                        <div class="item-info">
-                            <h3><a title="Acer">Acer Aspire 15.6" Touchscreen Laptop, Intel i3-4030, 4GB RAM, 500GB HDD, Win 8.1</a></h3>
-                            <div class="dd-deal-price">
-                                <span> $349.99</span>
+                    <ui:repeat value="#{homeBean.items}" var="item">
+                        <div class="list-item">
+                            <h:form>
+                                <input type="hidden" name="itemId" value="#{item.id}" />
+                                <h:commandLink action="#{productBean.selectedItem}" class="img-wrapper">
+                                    <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
+                                </h:commandLink>
+                            </h:form>
+                            <div class="item-info">
+                                <h:form>
+                                    <input type="hidden" name="itemId" value="#{item.id}" />
+                                    <h3>
+                                        <h:commandLink action="#{productBean.selectedItem}" value="#{item.name}"/>
+                                    </h3>
+                                </h:form>
+                                <div class="dd-deal-price">
+                                    <span> $#{homeBean.getAuction(item.auctionId).startingPrice}</span>
+                                </div>
+                                <div class="dd-list-price">
+                                    <h:outputText value="#{homeBean.getAuction(item.auctionId).startingDate}" >
+                                        <f:convertDateTime pattern="EEE, d MMM yyyy" /> />
+                                    </h:outputText>
+                                </div>
+                                <div class="dd-list-price">Time Left:
+                                    <span>
+                                        <h:outputText value="#{homeBean.getAuction(item.auctionId).endDate}" >
+                                            <f:converter converterId="edu.mum.RelativeDateTimeConverter" />
+                                        </h:outputText>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="dd-list-price">
-                                <span> $599.99</span>
-                                | 42% OFF
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="list-item">
-                        <a class="img-wrapper" title="Acer" href="login.xhtml">
-                            <img alt="Acer" src="http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/t34AAOSwMKpUaMYo/$_106.JPG"></img></a>
-                        <div class="item-info">
-                            <h3><a title="Acer">Acer Aspire 15.6" Touchscreen Laptop, Intel i3-4030, 4GB RAM, 500GB HDD, Win 8.1</a></h3>
-                            <div class="dd-deal-price">
-                                <span> $349.99</span>
-                            </div>
-                            <div class="dd-list-price">
-                                <span> $599.99</span>
-                                | 42% OFF
-                            </div>
                         </div>
-
-                    </div>
-                    <div class="list-item">
-                        <a class="img-wrapper" title="Acer" href="login.xhtml">
-                            <img alt="Acer" src="http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/t34AAOSwMKpUaMYo/$_106.JPG"></img></a>
-                        <div class="item-info">
-                            <h3><a title="Acer">Acer Aspire 15.6" Touchscreen Laptop, Intel i3-4030, 4GB RAM, 500GB HDD, Win 8.1</a></h3>
-                            <div class="dd-deal-price">
-                                <span> $349.99</span>
-                            </div>
-                            <div class="dd-list-price">
-                                <span> $599.99</span>
-                                | 42% OFF
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="list-item">
-                        <a class="img-wrapper" title="Acer" href="login.xhtml">
-                            <img alt="Acer" src="http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/t34AAOSwMKpUaMYo/$_106.JPG"></img></a>
-                        <div class="item-info">
-                            <h3><a title="Acer">Acer Aspire 15.6" Touchscreen Laptop, Intel i3-4030, 4GB RAM, 500GB HDD, Win 8.1</a></h3>
-                            <div class="dd-deal-price">
-                                <span> $349.99</span>
-                            </div>
-                            <div class="dd-list-price">
-                                <span> $599.99</span>
-                                | 42% OFF
-                            </div>
-                        </div>
-
-                    </div>
+                    </ui:repeat>
                 </div>
 
                 <center>

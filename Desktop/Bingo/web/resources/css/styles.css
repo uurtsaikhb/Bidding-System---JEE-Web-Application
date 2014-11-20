@@ -397,6 +397,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 .item-info {
     width: 200px;
 }
+
+.item-info h3 a{
+    text-decoration: none;
+    color: #282a2b;
+}
+
 .item-info {
     display: inline-block;
     vertical-align: top;
@@ -435,8 +441,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 .dd-list-price {
     font-size: 15px;
 }
-.dd-list-price {
+.dd-list-price 
+{
     color: #777;
+}
+
+.dd-list-price span
+{
+    color: #e31132;
 }
 
 .pagination {

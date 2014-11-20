@@ -32,5 +32,7 @@ public interface ItemFacadeLocal {
     List<Item> findByCategory(Category category);
 
     int count();
+
+    public List<Item> findForIndex();
     
 }

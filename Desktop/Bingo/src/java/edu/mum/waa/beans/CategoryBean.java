@@ -5,8 +5,11 @@
  */
 package edu.mum.waa.beans;
 
+import edu.mum.waa.controllers.AuctionFacadeLocal;
 import edu.mum.waa.controllers.CategoryFacadeLocal;
 import edu.mum.waa.controllers.ItemFacadeLocal;
+import edu.mum.waa.filter.Util;
+import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.Category;
 import edu.mum.waa.models.Item;
 import javax.inject.Named;
@@ -37,6 +40,9 @@ public class CategoryBean implements Serializable {
     CategoryFacadeLocal categoryController;
     @EJB
     ItemFacadeLocal itemController;
+    @EJB
+    AuctionFacadeLocal auctionController;
+    
     
     private List<Category> categories;
     private List<Item> items;
@@ -67,7 +73,21 @@ public class CategoryBean implements Serializable {
     
     public List<Item> getItems()
     {
-        return itemController.findByCategory((Category)categoryController.find(categoryId));
+        items = new ArrayList<>();
+        for(Item ite: itemController.findByCategory((Category)categoryController.find(categoryId)))
+        {
+            Auction auction = auctionController.findByItemId(ite);
+            if(auction.getStatus() == Util.AUCTION_STATUS_STARTED)
+            {
+                items.add(ite);
+            }
+        }
+        return items;
+    }
+    
+    public Auction getAuction(int auctionId)
+    {
+        return auctionController.find(auctionId);
     }
     
   
