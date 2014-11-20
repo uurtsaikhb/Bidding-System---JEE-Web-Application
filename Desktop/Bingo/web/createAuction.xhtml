@@ -18,10 +18,14 @@
                     <h:form>
                         <p></p>
                         <h2>#{profileBean.selectedItem.name}</h2>
-                        <h:graphicImage library="images" name="iphone6.jpg" />
+                        
+                        <ui:repeat value="#{pictureBean.getItemPictures(profileBean.selectedItem)}" 
+                                   var="picture" rendered="#{not empty pictureBean.getItemPictures(profileBean.selectedItem)}" size="1">
+                            <h:graphicImage value="#{picture.path}" width="160" />
+                        </ui:repeat>
                         
                         <p>#{profileBean.selectedItem.description}</p>
-                        
+
                         <h:panelGrid columns="2">
 
                             Starting price:
@@ -32,15 +36,15 @@
 
                             Buy out Price:
                             <h:inputText value="#{auctionBean.buyoutPrice}" size="32" />
-                            
+
                             <p:outputLabel for="datetimeStart" value="Datetime:" />
                             <p:calendar id="datetimeStart" value="#{auctionBean.startingDate}" pattern="MM/dd/yyyy HH:mm:ss" />
 
                             <p:outputLabel for="datetimeEnd" value="Datetime:" />
                             <p:calendar id="datetimeEnd" value="#{auctionBean.endDate}" pattern="MM/dd/yyyy HH:mm:ss" />
-                            
+
                         </h:panelGrid>
-                        <h:commandButton value="Add item" action="#{auctionBean.createAuction(profileBean.selectedItem.id, loginBean.user.id)}" class="btn btn-add"/>
+                        <h:commandButton value="Add Auction" action="#{auctionBean.createAuction(profileBean.selectedItem.id, loginBean.user.id)}" class="btn btn-add"/>
                     </h:form>
                 </div>
             </ui:define>
