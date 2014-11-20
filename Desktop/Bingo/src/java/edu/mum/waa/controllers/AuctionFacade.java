@@ -7,6 +7,8 @@ package edu.mum.waa.controllers;
 
 import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.Item;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,6 +39,15 @@ public class AuctionFacade extends AbstractFacade<Auction> implements AuctionFac
         query.setParameter("itemId", item);
 
         return (Auction)query.getSingleResult();
+    }
+
+    @Override
+    public List<Auction> findByStatus(int status) {
+        
+        Query query = em.createNamedQuery("Auction.findByStatus", Auction.class);
+        query.setParameter("status", status);
+
+        return (List<Auction>)query.getResultList();
     }
     
 }
