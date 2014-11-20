@@ -139,4 +139,9 @@ public class AuctionBean implements Serializable {
     public void setSeller(User seller) {
         this.seller = seller;
     }
+    
+    public Auction getAuction(int auctionId)
+    {
+        return auctionController.find(auctionId);
+    }
 }

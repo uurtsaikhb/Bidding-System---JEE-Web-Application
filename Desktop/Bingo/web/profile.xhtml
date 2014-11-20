@@ -23,15 +23,10 @@
                         </p>
                         <ui:repeat value="#{itemBean.userItems}" var="item">
                             <div class="list-item">
-                                <h:form>
-                                    <input type="hidden" name="itemId" value="#{item.id}" />
-                                    <h:commandLink action="#{productBean.selectedItem}" class="img-wrapper">
-                                        <ui:repeat value="#{pictureBean.getItemPictures(item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(item)}" size="1">
-                                            <h:graphicImage value="#{picture.path}" width="160" />
-                                        </ui:repeat>
-                                        <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
-                                    </h:commandLink>
-                                </h:form>
+                                <ui:repeat value="#{pictureBean.getItemPictures(item)}" var="picture" rendered="#{not empty pictureBean.getItemPictures(item)}" size="1">
+                                    <h:graphicImage value="#{picture.path}" width="160" />
+                                </ui:repeat>
+                                <h:graphicImage value="resources/images/default_product.png" width="160" rendered="#{empty pictureBean.getItemPictures(item)}" />
                                 <div class="item-info">
                                     <h3>
                                         <a title="Acer">#{item.name}</a>
@@ -41,10 +36,10 @@
                                         <!--<h:commandLink action="" value="Detail"/>-->
                                     </h:form>
                                     <h:form>
-                                        <h:commandButton class="btn btn-add" action="#{profileBean.seeItemDetails(item.id)}" value="Product Detial"/>
+                                        <h:commandButton class="btn btn-add" action="#{profileBean.seeItemDetail(item.id)}" value="Product Detial"/>
                                         <!--<h:commandLink action="" value="Detail"/>-->
                                     </h:form>
-                                    
+
                                 </div>
                             </div>
                         </ui:repeat>

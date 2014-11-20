@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="windowTitle">
+                #{msgs.loginTitle}
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container">
+                    <div class="create_auction">
+                    <h:form>
+                        <div class="left_container">
+                            <h2>#{profileBean.selectedItem.name}</h2>
+
+                            <ui:repeat value="#{pictureBean.getItemPictures(profileBean.selectedItem)}" 
+                                       var="picture" rendered="#{not empty pictureBean.getItemPictures(profileBean.selectedItem)}" size="1">
+                                <h:graphicImage value="#{picture.path}" width="160" styleClass="big_image"/>
+                            </ui:repeat>
+                        </div>
+                        <div class="right_container">
+                            <p class='description'>#{profileBean.selectedItem.description}</p>
+                            <table>
+                                <tr class="table_row">
+                                    <td><span class="form_label">Starting price:</span></td>
+                                    <td><div class="form-row"><h:outputText value="#{auctionBean.getAuction(profileBean.selectedItem.auctionId).startingPrice}"/></div></td>
+                                </tr>
+                                <tr class="table_row">
+                                    <td><span class="form_label">Step price:</span></td><td><div class="form-row">
+                                            <h:outputText value="#{auctionBean.getAuction(profileBean.selectedItem.auctionId).stepPrice}"/></div></td>
+                                </tr>
+                                <tr><td><span class="form_label">Buy out Price:</span></td><td><div class="form-row">
+                                            <h:outputText value="#{auctionBean.getAuction(profileBean.selectedItem.auctionId).buyoutPrice}" /></div></td></tr>
+                                <tr class="table_row">
+                                    <td><p:outputLabel for="datetimeStart" value="Start:" styleClass="form_label"/></td>
+                                    <td><h:outputText id="datetimeStart" value="#{auctionBean.getAuction(profileBean.selectedItem.auctionId).startingDate}" /></td>
+                                </tr>
+                                <tr class="table_row">
+                                    <td><p:outputLabel for="datetimeEnd" value="End:" styleClass="form_label"/></td>
+                                    <td><h:outputText id="datetimeEnd" value="#{auctionBean.getAuction(profileBean.selectedItem.auctionId).endDate}" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </h:form>
+                    </div>
+                    <br class="clear" />
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

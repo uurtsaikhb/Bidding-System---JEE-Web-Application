@@ -12,6 +12,7 @@ import edu.mum.waa.filter.Util;
 import edu.mum.waa.models.Auction;
 import edu.mum.waa.models.Bid;
 import edu.mum.waa.models.Item;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;
@@ -94,8 +95,12 @@ public class ProductBean implements Serializable{
     }
     
     
-    public void createBid()
+    public void createBid() throws IOException
     {
+        if(Util.getUser() == null)
+        {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        }
         Auction auct = auctionController.find(auctionId);
         Bid bid = new Bid(Integer.SIZE, auct.getId(), (int) (myBid - auct.getHammerPrice()), myBid, new Date());
         bid.setBuyerId(Util.getUser());

@@ -52,6 +52,13 @@ public class ProfileBean implements Serializable{
     public ProfileBean() {
     }
     
+    public String seeItemDetail (int itemId) {
+        
+        selectedItem = itemController.find(itemId);
+
+        return "productDetail?faces-redirect=true";
+    }
+    
     
     public String seeItemDetails (int itemId) {
         

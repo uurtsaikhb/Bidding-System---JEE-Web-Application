@@ -55,6 +55,12 @@ public class AuthFilter implements Filter {
                 if (reqURI.indexOf("/profile.xhtml") >= 0) {
                     res.sendRedirect("login.xhtml");
                 }
+                if (reqURI.indexOf("/createAuction.xhtml") >= 0) {
+                    res.sendRedirect("login.xhtml");
+                }
+                if (reqURI.indexOf("/productDetail.xhtml") >= 0) {
+                    res.sendRedirect("login.xhtml");
+                }
             }
 
             chain.doFilter(request, response);
