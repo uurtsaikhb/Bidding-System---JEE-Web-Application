@@ -693,3 +693,7 @@ ul
   font-size: 10px;
   padding-top: 2px;
 }
+
+.ui-widget {
+    font-size: 12px !important;
+}

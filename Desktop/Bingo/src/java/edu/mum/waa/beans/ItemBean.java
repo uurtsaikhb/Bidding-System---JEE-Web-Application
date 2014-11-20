@@ -63,7 +63,7 @@ public class ItemBean implements Serializable {
      this List stores user's items
      */
     private List<Item> userItems;
-    
+
     private Item chosenItem; // chosen item  for make auction
 
     public ItemBean() {
@@ -103,7 +103,7 @@ public class ItemBean implements Serializable {
         item.setCategoryId(categoryController.find(categoryId));
         itemController.create(item);
 
-        for(File file : files) {
+        for (File file : files) {
             Picture picture = new Picture(path + File.separator + file.getName(), item);
             pictureController.create(picture);
         }
@@ -111,7 +111,7 @@ public class ItemBean implements Serializable {
 //        
         UserItem userItem = new UserItem(Integer.SIZE, item.getId());
         userItem.setUserId(Util.getUser());
-        
+
         System.out.println("USER ID : " + Util.getUser().getFirstname());
         userItemController.create(userItem);
 
@@ -119,7 +119,7 @@ public class ItemBean implements Serializable {
     }
 
     public List<Item> getUserItems() {
-        
+
         userItems = new ArrayList<>();
         // get items from database using logged user.
         List<UserItem> user_item = userItemController.findAll();
@@ -128,7 +128,7 @@ public class ItemBean implements Serializable {
                 userItems.add(itemController.find(ui.getItemId()));
             }
         }
-        
+
         return userItems;
     }
 
@@ -140,6 +140,14 @@ public class ItemBean implements Serializable {
         chosenItem = itemController.find(itemId);
 
         return "createAuction?faces-redirect=true";
+    }
+
+    public boolean checkCatId(int aId) {
+        System.out.println("AC: " + aId );
+        if(aId != 0)
+            return true;
+        else 
+            return false;
     }
 
     public String getName() {
@@ -164,7 +172,7 @@ public class ItemBean implements Serializable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-    }    
+    }
 
     public Item getChosenItem() {
         return chosenItem;

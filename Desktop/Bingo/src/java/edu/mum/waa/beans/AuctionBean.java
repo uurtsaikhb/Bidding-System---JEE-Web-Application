@@ -73,7 +73,7 @@ public class AuctionBean implements Serializable {
         Item tempItem = itemController.find(itemId);
             tempItem.setAuctionId(auction.getId());
         itemController.edit(tempItem);
-        return "index?faces-redirect=true"; // returns your auction list. 
+        return "myAuction?faces-redirect=true"; // returns your auction list. 
     }
 
     public Date getStartingDate() {

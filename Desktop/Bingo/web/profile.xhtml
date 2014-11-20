@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>My Page</title>
     </h:head>
@@ -16,7 +16,11 @@
             <ui:define name="content">
                 <div class="container">
                     <div class="list-items">
-
+                        <p>
+                            <h:form>
+                                <h:commandLink value="My auctions" action="myAuction?faces-redirect=true"/>
+                            </h:form>
+                        </p>
                         <ui:repeat value="#{itemBean.userItems}" var="item">
                             <div class="list-item">
                                 <h:form>
@@ -29,10 +33,12 @@
                                     </h:commandLink>
                                 </h:form>
                                 <div class="item-info">
-                                    <h3><a title="Acer">#{item.name}</a></h3>
-                                        #{item.description}
+                                    <h3>
+                                        <a title="Acer">#{item.name}</a>
+                                    </h3>
+                                    #{item.description}
                                     <h:form>
-                                        <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="make auction"/>
+                                        <h:commandLink action="#{profileBean.seeItemDetails(item.id)}" value="Sell an Item"/>
                                     </h:form>
                                     <div class="dd-deal-price">
                                         <span> $#{(profileBean.getAuction(item.id)).startingPrice}</span>
